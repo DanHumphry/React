@@ -4,7 +4,8 @@ class CreateContent extends Component{
     render(){
       return (
         <article>
-            <h2>Create</h2>
+          <section className="et-slide">
+            <h1>Create</h1>
             <form action="/create_process" method="post"
               onSubmit={function(e){
                 e.preventDefault();
@@ -14,14 +15,15 @@ class CreateContent extends Component{
                 );
               }.bind(this)}
             >
-              <p><input type="text" name="title" placeholder="title"></input></p>
+              <p><input className="input-taps" type="text" name="title" placeholder="Title"></input></p>
               <p>
-                <textarea name="sub" placeholder="description"></textarea>
+                <textarea className="textarea-taps" name="sub" placeholder="Description"></textarea>
               </p>
               <p>
-                <input type="submit"></input>
+                <input className="submit-taps" type="submit" value="Submit"></input>
               </p>
             </form>
+          </section>
         </article>
       );
     }

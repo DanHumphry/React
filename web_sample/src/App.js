@@ -59,7 +59,7 @@ class App extends Component{
         this.setState({
           contents:_contents,
           mode:'read',
-          selected_content_id:this.Max_content_id
+          select_content_id:this.Max_content_id
         });
       }.bind(this)}></CreateContent>
     }else if(this.state.mode === 'update'){

@@ -17,7 +17,8 @@ class UpdateContent extends Component{
   render(){
     return (
       <article>
-          <h2>Update</h2>
+        <section className="et-slide">
+          <h1>Update</h1>
           <form action="/update_process" method="post"
             onSubmit={function(e){
               e.preventDefault();
@@ -30,22 +31,24 @@ class UpdateContent extends Component{
           >
             <input type="hidden" name="id" value={this.state.id}></input>
             <p><input
+            className="input-taps"
             type="text"
             name="title" 
-            placeholder="title"
+            placeholder="Title"
             // value={this.props.data.title}
             value={this.state.title}
             onChange={this.inputFormHandler}
             ></input></p>
             <p>
-              <textarea name="sub" placeholder="description" value={this.state.sub}
+              <textarea className="textarea-taps" name="sub" placeholder="Description" value={this.state.sub}
               onChange={this.inputFormHandler}
               ></textarea>
             </p>
             <p>
-              <input type="submit"></input>
+              <input className="submit-taps" type="submit" value="Submit"></input>
             </p>
           </form>
+        </section>  
       </article>
     );
   }

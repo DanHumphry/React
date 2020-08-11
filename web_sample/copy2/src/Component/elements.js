@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Footer from './Footer';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 112af3a7b2fdff6bddaf44b52af185deb4a95a1e
 class Elements extends Component{
     render(){
         return(

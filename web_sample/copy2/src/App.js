@@ -14,14 +14,9 @@ class App extends Component{
     this.state = {
       select_content_id:1,
       contents : [
-<<<<<<< HEAD
         {id:1, title:'HOME', content:<HomeContents></HomeContents>},
         {id:2, title:'Generic', content:<Generic></Generic>},
         {id:3, title:'Elements', content:<Elements></Elements>}
-=======
-        {id:1, content:<Generic></Generic>},
-        {id:2, content:<Elements></Elements>}
->>>>>>> 112af3a7b2fdff6bddaf44b52af185deb4a95a1e
       ]
     } 
   }

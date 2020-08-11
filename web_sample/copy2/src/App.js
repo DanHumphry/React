@@ -3,6 +3,7 @@ import Header from "./Component/Header";
 import Banner from "./Component/Banner";
 import Footer from "./Component/Footer";
 import Generic from "./Component/Generic";
+import Elements from "./Component/Elements";
 import './assets/css/Main.css';
 import HomeContents from './Component/HomeContents';
 
@@ -14,7 +15,7 @@ class App extends Component{
       mode:'home',
       contents : [
         {id:1, content:<Generic></Generic>},
-        {id:2, content:}
+        {id:2, content:<Elements></Elements>}
       ]
     }
   }

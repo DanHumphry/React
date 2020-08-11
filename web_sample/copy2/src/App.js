@@ -3,6 +3,7 @@ import Header from "./Component/Header";
 import Banner from "./Component/Banner";
 import Footer from "./Component/Footer";
 import Generic from "./Component/Generic";
+import Elements from "./Component/Elements";
 import './assets/css/Main.css';
 import HomeContents from './Component/HomeContents';
 
@@ -11,41 +12,58 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      mode:'home',
+      select_content_id:1,
       contents : [
-        {id:1, content:<Generic></Generic>},
-        {id:2, content:}
+        {id:1, title:'HOME', content:<HomeContents></HomeContents>},
+        {id:2, title:'Generic', content:<Generic></Generic>},
+        {id:3, title:'Elements', content:<Elements></Elements>}
       ]
-    }
+    } 
+  }
+
+  getReadContent(){
+    var i = 0;
+      while(i < this.state.contents.length){
+        var data = this.state.contents[i];
+        if(data.id === this.state.select_content_id) {
+          return data;
+        }
+        i = i + 1;
+      }
   }
 
   getContent(){
-    if(this.state.mode === 'home'){
-      return <HomeContents></HomeContents>;
+    var _article, _content = null;
+    if(this.state.select_content_id === Number(1)){
+      _content = this.getReadContent();
+      _article = _content.content
+    }else if(this.state.select_content_id === Number(2)){
+      _content = this.getReadContent();
+      _article = _content.content
+    }else if(this.state.select_content_id === Number(3)){
+      _content = this.getReadContent();
+      _article = _content.content
     }
-    else if(this.state.mode === 'generic'){
-      return <Generic></Generic>;
-    }
+
+    return _article;
   }
 
   render(){
     return(
       <div>
       <Header
-        onChangePage={function(){
+        onChangePage={function(id){
           this.setState({
-            mode:'generic'
+            select_content_id : Number(id)
           })
         }.bind(this)}
+        data={this.state.contents}
       ></Header>
       <Banner></Banner>
-      <div>
       {this.getContent()}
-      </div>
       <Footer></Footer>
       </div> 
     );
   }
 }
-
 export default App;

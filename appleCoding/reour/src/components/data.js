@@ -9,12 +9,12 @@ export default[
     id : 1,
     title : "Red Knit",
     content : "Born in Seoul",
-    price : 120000
+    price : 110000
     },
     {
     id : 2,
     title : "Grey Yordan",
     content : "Born in HomeMade",
-    price : 120000
+    price : 105000
     }
 ]

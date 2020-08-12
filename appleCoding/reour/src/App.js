@@ -1,86 +1,46 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import './App.css';
-import {Navbar, Nav, NavDropdown, Form, Button, FormControl, Jumbotron} from 'react-bootstrap';
-import Data from './data';
+import Data from './components/data';
+import {Link, Route, Switch} from 'react-router-dom';
+import Detail from './components/Detail';
+import Navi from './components/Navi';
+import Jumbo from './components/Jumbo';
+import Card from './components/Card';
 
 function App() {
-
 let [shoes, shoesChange] = useState(Data);
 
   return (
     <div className="App">
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Link</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form>
-      </Navbar.Collapse>
-    </Navbar>
+      <Navi></Navi>
+    {/* 둘다보이는 이유는 /detail은 /을 포함(연관)하기때문 */}
+    {/* 중복을허용하지않는 switch */}
+      <Switch> 
+        <Route exact path="/">
+          <Jumbo></Jumbo>
+          <div className="container">
+            <div className="row">
+              {
+                shoes.map((a, i)=>{
+                  return(
+                  <Card shoes={a} i={i} key={i}></Card>
+                )})
+              }
+            </div>
+          </div>
+        </Route>
 
-    <Jumbotron className="background">
-    <h1>20% Season Off</h1>
-    <p>
-      This is a simple hero unit, a simple jumbotron-style component for calling
-      extra attention to featured content or information.
-    </p>
-    <p>
-      <Button variant="primary">Learn more</Button>
-    </p>
-    </Jumbotron>
+        <Route path="/detail/:id">
+          <Detail shoes={shoes} id={shoes.id} key={shoes.id}></Detail>
+        </Route>
+        {/* :id는 이름이고 id값에 따라 보여주고 싶은 내용을 조절하는것 */}
 
-    <div className="container">
-      <div className="row">
-        <div className="col-md-4">
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" 
-          width="100%"/>
-          <h4>{ shoes[0].title }</h4>
-          <p>{ shoes[0].content }</p>
-          <p>${ shoes[0].price }원</p>
-        </div>
-        <div className="col-md-4">
-        <img src="https://codingapple1.github.io/shop/shoes2.jpg" 
-          width="100%"/>
-          <h4>{ shoes[1].title }</h4>
-          <p>{ shoes[1].contens }</p>
-          <p>{ shoes[1].price }</p>
-        </div>
-        <div className="col-md-4">
-        <img src="https://codingapple1.github.io/shop/shoes3.jpg" 
-          width="100%"/>
-          <h4>{ shoes[2].title }</h4>
-          <p>{ shoes[2].title }</p>
-        </div>
-      </div>
-      <div>
-        <Contents shoes={shoes}></Contents>
-      </div>
-    </div>
+      </Switch>
+    {/* <Route path="어쩌구" component={Modal}></Route> */}
+    {/* component로 보내는 방법 */}
     </div>
   );
-}
-
-function Contents(props){
-    return(   
-    <div className="col-md-4">
-      <h4>{ props.shoes[0].title }</h4>
-      <p>{ props.shoes[0].content }</p>
-      <p>${ props.shoes[0].price }원</p>
-    </div>
-   )
 }
 
 export default App;

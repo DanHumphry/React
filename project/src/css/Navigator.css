@@ -1,0 +1,27 @@
+.Nav_{
+    width: 100%;
+}
+.Banner_{
+    text-align: center;
+}
+.JoinSection_{
+    text-align: center;
+    width: 100%;
+}
+.JoinForm_{
+    font-size: 14px;
+    display: block;
+    width: 30%;
+    height: 42px;
+    margin-bottom: 12px;
+    margin-left: 35%;
+    padding: 16px 13px;
+    color: #999999;
+    border: 1px solid #d9d9d9;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+.JoinButton_{
+    margin-left: 45%;
+}

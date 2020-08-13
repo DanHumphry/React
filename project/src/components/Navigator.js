@@ -11,20 +11,23 @@ function Navigator(props){
             <Nav.Link href="/">Pricing</Nav.Link>
           </Nav>
           <Form inline>
-            <FormControl type="email" placeholder="Your Email" className="mr-sm-2"
-            onChange={(e)=>{
-              let Arr = [...props.LoginInput]
-              Arr = e.target.value
-              props.ChangeLoginInput(Arr)
-            }} />
-            <FormControl type="password" placeholder="Your Password" className="mr-sm-2"
+            <FormControl type="text" placeholder="Your ID" className="mr-sm-2"
             onChange={(e)=>{
               props.ChangeLoginInput(e.target.value)
             }} />
+            <FormControl type="password" placeholder="Your Password" className="mr-sm-2"
+            onChange={(e)=>{
+              props.ChangeLoginInput2(e.target.value)
+            }} />
             <Button variant="outline-light"
             onClick={
-              ()=>{
-
+              (e)=>{
+                let Arr = [...props.UserId]
+                let Arr2 = [...props.UserPassword]
+                Arr.unshift(props.LoginInput)
+                Arr2.unshift(props.LoginInput2)
+                props.ChangeUserId(Arr)
+                props.ChangeUserPassword(Arr2)
               }
             }>로그인</Button>
           </Form>

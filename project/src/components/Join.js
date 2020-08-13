@@ -12,21 +12,31 @@ function Join(props){
     <div>
         <Form inline>
             <div className="JoinSection_">
-                <p>
-                <input type="text" placeholder="Your Name" className="JoinForm_"></input>
-                <input type="email" placeholder="Your email" className="JoinForm_"></input>
-                <input type="password" placeholder="Your password" className="JoinForm_"></input> 
-                </p>              
+                <input type="text" placeholder="Your ID" className="JoinForm_"
+                onChange={(e)=>{
+                    props.ChangeLoginInput(e.target.value)
+                }}></input>
+                <input type="password" placeholder="Your password" className="JoinForm_"
+                onChange={(e)=>{
+                    props.ChangeLoginInput2(e.target.value)
+                }}></input> 
+                <Button variant="dark" 
+                    onClick={
+                    (e)=>{
+                            // e.preventDefault();
+                        let Arr = [...props.UserId]
+                        let Arr2 = [...props.UserPassword]
+                        Arr.unshift(props.LoginInput)
+                        Arr2.unshift(props.LoginInput2)
+                        props.ChangeUserId(Arr)
+                        props.ChangeUserPassword(Arr2)
+                        HiddenNav()
+                        console.log(Arr)
+                        console.log(props.LoginInput)
+                    }
+                }>회원가입</Button>                            
             </div>
-            <div className="JoinButton_">
-                <p>
-            <Button variant="dark" onClick={
-                ()=>{
-                    HiddenNav()
-                }
-            }>회원가입</Button>
-                </p>
-            </div>
+
         </Form>
     </div>
     )

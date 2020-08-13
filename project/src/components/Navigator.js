@@ -11,8 +11,16 @@ function Navigator(props){
             <Nav.Link href="/">Pricing</Nav.Link>
           </Nav>
           <Form inline>
-            <FormControl type="email" placeholder="Your Email" className="mr-sm-2" />
-            <FormControl type="password" placeholder="Your Password" className="mr-sm-2" />
+            <FormControl type="email" placeholder="Your Email" className="mr-sm-2"
+            onChange={(e)=>{
+              let Arr = [...props.LoginInput]
+              Arr = e.target.value
+              props.ChangeLoginInput(Arr)
+            }} />
+            <FormControl type="password" placeholder="Your Password" className="mr-sm-2"
+            onChange={(e)=>{
+              props.ChangeLoginInput(e.target.value)
+            }} />
             <Button variant="outline-light"
             onClick={
               ()=>{

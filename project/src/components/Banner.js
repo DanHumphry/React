@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
-import Join from './Join';
+import React from 'react';
 import Intro from './Intro';
-import {Jumbotron} from 'react-bootstrap';
+import {Jumbotron, Button, Form} from 'react-bootstrap';
 
 function Banner(props){
-    let [BannerContent] = useState([
-    <Intro Boolean={props.Boolean} ChangeBoolean={props.ChangeBoolean}></Intro>,
-    <Join Boolean={props.Boolean} ChangeBoolean={props.ChangeBoolean}
-    LoginInput={props.LoginInput} ChangeLoginInput={props.ChangeLoginInput} LoginInput2={props.LoginInput2} ChangeLoginInput2={props.ChangeLoginInput2}
-    UserId={props.UserId} ChangeUserId={props.ChangeUserId} UserPassword={props.UserPassword} ChangeUserPassword={props.ChangeUserPassword}></Join>
-    ]);
 
     return(
         <div className="Banner_">
         <Jumbotron>
             {
                 props.Boolean === false
-                ? BannerContent[0]
-                : BannerContent[1]
+                ? <Intro Boolean={props.Boolean} ChangeBoolean={props.ChangeBoolean}
+                HiddenNav={props.HiddenNav} SuccessLogin={props.SuccessLogin} ChangeSuccessLogin={props.ChangeSuccessLogin}></Intro>
+                : <Form inline>
+                    <div className="JoinSection_">
+                        <input type="text" placeholder="Your ID" className="JoinForm_"
+                        onChange={(e)=>{
+                            props.ChangeLoginInput(e.target.value)
+                        }}></input>
+                        <input type="password" placeholder="Your password" className="JoinForm_"
+                        onChange={(e)=>{
+                            props.ChangeLoginInput2(e.target.value)
+                        }}></input> 
+                        <Button variant="dark" 
+                            onClick={
+                            (e)=>{
+                                e.preventDefault();
+                                let ID = [...props.UserId]
+                                let PS = [...props.UserPassword]
+                                ID.unshift(props.LoginInput)
+                                PS.unshift(props.LoginInput2)
+                                props.ChangeUserId(ID)
+                                props.ChangeUserPassword(PS)
+                                props.HiddenNav();
+                                console.log(props.LoginInput);
+                            }
+                        }>회원가입</Button>                            
+                    </div>
+                </Form>
             }
         </Jumbotron>
         </div>

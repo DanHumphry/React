@@ -1,0 +1,41 @@
+
+.row{
+    width: 99%;
+}
+.Genres{
+    margin-left: 5%;
+    
+}
+.All_genres{
+    position: absolute;
+    right: 5%;
+}
+
+.slider__items-all{
+    color: black;
+}
+.item__infos{
+    text-align: center;
+}
+.slider__items-slider{
+    margin-top: 10px;
+}
+ul{
+    list-style: none;
+}
+.slider__items-slides{
+    display: inline-flex;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    width: 100%;
+    margin-bottom: 60px;
+}
+.item__image{
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-right: 40px;
+}
+.img__size{
+    width: 210px;
+    height: 200px;
+}

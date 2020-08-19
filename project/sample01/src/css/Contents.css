@@ -1,0 +1,29 @@
+.content_ul{
+    display: inline-flex;
+    flex-wrap: nowrap;
+    margin-left: 5px;
+    margin-top: 70px;
+}
+.article__size
+{
+    border: 1px solid gray;
+    border-radius: .5em;
+    width: 240px;
+    margin-right: 15px;
+}
+.img__size
+{
+    
+    border-top-left-radius: .4em;
+    border-top-right-radius: .4em;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.InArticle__text{
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}

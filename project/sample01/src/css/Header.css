@@ -1,0 +1,78 @@
+ol, ul
+{
+	padding: 0;
+	list-style: none;
+}
+a:hover
+{
+	text-decoration: none;
+}
+.container
+{
+	margin: 0px auto;
+}
+a
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+/**   header    **/
+#header-wrapper
+{
+    background: black;
+}
+#logo
+{
+    padding: 5em 0em;
+    text-align: center;
+}
+#logo h1
+{
+    font-size: 3.5em;
+}
+#logo h3
+{
+    color: #fff;
+}
+.login__button{
+    color: #fff;
+    background-color: black;
+    border: none;
+}
+
+
+/**   menu    **/
+#menu-wrapper
+{
+    background: black;
+    margin-top: 0px;
+    padding: .1em 0 .1em 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+#menu
+{
+    margin: 0px auto;
+}
+#menu ul
+{
+    text-align: center;
+}
+#menu li
+{
+    display: inline-block;
+}
+#menu li a
+{
+    display: inline-block;
+    margin-left: 2.5em;
+    letter-spacing: 0.20em;
+    text-decoration: none;
+    font-size: 0.90em;
+    font-weight: 600;
+    text-transform: uppercase;
+    outline: 0;
+    color: #FFF;
+}

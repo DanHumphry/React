@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import GoogleLogin from 'react-google-login';
+import KaKaoLogin from 'react-kakao-login';
 
 function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [url, setUrl] = useState("");
 
-  const[name, setName] = useState("");
+  const responseKaKao = res => {
+    setName(res.profile.properties.nickname)
+    setUrl(res.profile.properties.profile_image)
+    // console.log(res.profile.properties)
+  }
 
-  const[email, setEmail] = useState("");
-
-  const[url, setUrl] = useState("");
-
-  const responseGoogle = response => {
-    console.log(response)
-    setName(response.profileObj.name);
-    setEmail(response.profileObj.email);
-    setUrl(response.profileObj.imageUrl);
+  const responseGoogle = res => {
+    setName(res.profileObj.name);
+    setEmail(res.profileObj.email);
+    setUrl(res.profileObj.imageUrl);
   }
 
   return (
@@ -26,8 +29,14 @@ function App() {
       clientId="161501678517-il8gdqt5ak46nuh9r2oku23aeebg5f53.apps.googleusercontent.com"
       buttonText="Login"
       onSuccess={responseGoogle}
-      onFailure={responseGoogle}
+      // onFailure={responseGoogle}
       cookiePolicy={'single_host_origin'}
+      />
+      <KaKaoLogin
+      jsKey={'b7c4131f590196416865ba9a8bb2b390'}
+      buttonText="KaKao"
+      onSuccess={responseKaKao}
+      getProfile={true}
       />
     </div>
   );

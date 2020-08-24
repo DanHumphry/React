@@ -10,7 +10,7 @@ function App() {
   const responseKaKao = res => {
     setName(res.profile.properties.nickname)
     setUrl(res.profile.properties.profile_image)
-    // console.log(res.profile.properties)
+    console.log(res.profile)
   }
 
   const responseGoogle = res => {

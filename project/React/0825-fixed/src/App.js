@@ -6,9 +6,11 @@ import Dashboard from './components/Dashboard'
 
 function App() {
   let [modal, setModal] = useState(false);
-//   const [userName, setUserName] = useState("");
-//   const [userEmail, setUserEmail] = useState("");
-//   const [userImg, setUserImg] = useState("");
+  let [LoginState,setLoginState] = useState(false)
+
+  const [user, setUser] = useState();
+
+  const logout = () => setUser(undefined);
 
   return (
     <div className="App">
@@ -23,15 +25,20 @@ function App() {
                   </svg></Link> 
                   </a>
                   <button color="darkGray" className="global-nav-links-btn-b"><Link to="/write">새 글 작성</Link></button>
-                  <button onClick={ ()=>{ setModal(!modal) } } className="global-nav-links-btn-c">로그인</button>
+                  {
+                    LoginState === false
+                    ? <button onClick={ ()=>{ setModal(true) } } className="global-nav-links-btn-c">로그인</button>
+                    : <button onClick={ ()=>{ 
+                      logout();
+                      setLoginState(false) } } className="global-nav-links-btn-c">로그아웃</button>
+                  }
               </div>
         </div>
         {/* ! Header */}
 
         {
           modal === true 
-          ? <Modal modal={modal} setModal={setModal} 
-        //   setUserName={setUserName} setUserEmail={setUserEmail} setUserImg={setUserImg}
+          ? <Modal modal={modal} setModal={setModal} user={user} setUser={setUser} setLoginState={setLoginState}
           ></Modal>
           : null
         }

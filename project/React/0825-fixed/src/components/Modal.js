@@ -5,27 +5,39 @@ import { Link, Route } from 'react-router-dom';
 
 function Modal(props){
     let [ChageLogin,setChangeLogin] = useState('로그인')
-    let [LoginState,setLoginState] = useState(false)
 
-    let [LoginEmail,setLoginEmail] = useState("")
-    let [LoginPassword,setLoginPassword] = useState("")
+    const [users,setUsers] = useState([
+      { email: 'kim@test.com', password: '123', name: '대현' },
+      { email: 'lee@test.com', password: '456', name: '승민' },
+      { email: 'park@test.com', password: '789', name: '상진' }
+    ])
 
-    let [JoinName,setJoinName] = useState("")
-    let [JoinEmail,setJoinEmail] = useState("")
-    let [JoinPassword,setJoinPassword] = useState("")
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    // const responseGoogle = res => {
-    //     props.setUserName(res.profileObj.name);
-    //     props.setUserEmail(res.profileObj.email);
-    //     props.setUserImg(res.profileObj.imageUrl);
-    // }
+    const handleClick = () => {
+      try {
+        login({ email, password });
+      } 
+      catch (e) {
+        setEmail('');
+        setPassword('');
+        props.setModal(true)
+      }
+    };
 
-  function ChcekLogin(){
-    {
-      
+    const login = ({ email, password }) => props.setUser([signIn({ email, password })]);
+
+    function signIn({ email, password }) {
+      const user = users.find(user => user.email === email && user.password === password);
+      if (user === undefined) throw new Error();
+      else {
+        props.setModal(false);
+        props.setLoginState(true);
+      }
+      return user;
     }
-    
-  }
 
     useEffect(()=>{
         (async ()=> {
@@ -33,7 +45,7 @@ function Modal(props){
             fetch('url')
             .then((res)=>res.json())
             .then((posts)=>{
-            //   setPosts(posts)
+              // setUsers(posts)
             })
           } catch(e){
             console.log(e)
@@ -62,19 +74,23 @@ function Modal(props){
                             ?(
                                 <>
                                 <div className="input__box1">
-                                    <input type="email" placeholder="이메일을 입력하세요" className="input__" onChange={(e)=>{
-                                        setLoginEmail(e.target.value)
-                                        console.log(e.target)
-                                    }}></input>
+                                    <input type="email" placeholder="이메일을 입력하세요" className="input__" 
+                                    onChange={(e)=>{
+                                      setEmail(e.target.value)
+                                    }}
+                                    ></input>
                                 </div>
                                 <div className="input__box1">
-                                    <input type="password" placeholder="비밀번호를 입력하세요" className="input__" onChange={(e)=>{
-                                        setLoginPassword(e.target.value)
-                                    }}></input>
+                                    <input type="password" placeholder="비밀번호를 입력하세요" className="input__" 
+                                    onChange={(e)=>{
+                                      setPassword(e.target.value)
+                                    }}
+                                    ></input>
                                 </div>
                                 <div className="input__box1">   
-                                    <button className="loginBtn" onClick={()=>{
-                                      
+                                    <button className="loginBtn" onClick={(e)=>{
+                                      e.preventDefault()
+                                      handleClick()
                                     }}>{ChageLogin}</button>
                                 </div>     
                                 </>
@@ -82,23 +98,34 @@ function Modal(props){
                             :(
                                 <>
                                 <div className="input__box">
-                                    <input type="email" placeholder="이름을 입력하세요" className="input__" onChange={(e)=>{
-                                        setJoinName(e.target.value)
-                                    }}></input>
+                                    <input type="email" placeholder="이름을 입력하세요" className="input__" 
+                                    onChange={(e)=>{
+                                      setName(e.target.value)
+                                    }}
+                                    ></input>
                                 </div>
                                 <div className="input__box">
-                                    <input type="email" placeholder="이메일을 입력하세요" className="input__" onChange={(e)=>{
-                                        setJoinEmail(e.target.value)
-                                    }}></input>
+                                    <input type="email" placeholder="이메일을 입력하세요" className="input__" 
+                                    onChange={(e)=>{
+                                      setEmail(e.target.value)
+                                    }}
+                                    ></input>
                                 </div>
                                 <div className="input__box">
-                                    <input type="password" placeholder="비밀번호를 입력하세요" className="input__" onChange={(e)=>{
-                                        setJoinPassword(e.target.value)
-                                    }}></input>
+                                    <input type="password" placeholder="비밀번호를 입력하세요" className="input__" 
+                                    onChange={(e)=>{
+                                      setPassword(e.target.value)
+                                    }}
+                                    ></input>
                                 </div>
                                 <div className="input__box">   
                                     <button className="loginBtn" onClick={()=>{
-                                      
+                                      let Arr = [...users]
+                                      Arr.unshift({ email: email, password: password, name: name })
+                                      setUsers(Arr)
+                                      props.setUser([{ email: email, password: password, name: name }])
+                                      props.setModal(false);
+                                      props.setLoginState(true);
                                     }}>{ChageLogin}</button>
                                 </div>    
                                 </>

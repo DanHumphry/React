@@ -17,7 +17,7 @@ function App() {
       {/* Header */}
       <Route exact path="/">
         <div className="global-nav">
-        <div className="global-nav-links">
+          <div className="global-nav-links">
                   <a href="/" className="product-name"><Link to="/">Velog</Link></a>
                   <a href="/" className="global-nav-links-btn-a">
                   <Link to="/serch"><svg width="17" height="18" viewBox="0 0 17 17">
@@ -32,8 +32,8 @@ function App() {
                       logout();
                       setLoginState(false) } } className="global-nav-links-btn-c">로그아웃</button>
                   }
-              </div>
-        </div>
+            </div>
+          </div>
         {/* ! Header */}
 
         {

@@ -5,6 +5,7 @@ import { Link, Route } from 'react-router-dom';
 
 function Modal(props){
     let [ChageLogin,setChangeLogin] = useState('로그인')
+    let [LoginState,setLoginState] = useState(false)
 
     let [LoginEmail,setLoginEmail] = useState("")
     let [LoginPassword,setLoginPassword] = useState("")
@@ -18,6 +19,13 @@ function Modal(props){
     //     props.setUserEmail(res.profileObj.email);
     //     props.setUserImg(res.profileObj.imageUrl);
     // }
+
+  function ChcekLogin(){
+    {
+      
+    }
+    
+  }
 
     useEffect(()=>{
         (async ()=> {
@@ -66,7 +74,7 @@ function Modal(props){
                                 </div>
                                 <div className="input__box1">   
                                     <button className="loginBtn" onClick={()=>{
-
+                                      
                                     }}>{ChageLogin}</button>
                                 </div>     
                                 </>
@@ -90,7 +98,7 @@ function Modal(props){
                                 </div>
                                 <div className="input__box">   
                                     <button className="loginBtn" onClick={()=>{
-
+                                      
                                     }}>{ChageLogin}</button>
                                 </div>    
                                 </>

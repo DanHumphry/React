@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import './App.css';
 import { Link, Route } from 'react-router-dom';
-import Modal from './components/Modal'
+import Modal from './components/Modal';
 import Dashboard from './components/Dashboard';
-import Content from './components/Content01';
+import Content01 from './components/Content01'
 
 function App() {
   let [modal, setModal] = useState(false);
-  let [LoginState, setLoginState] = useState(false)
+  let [LoginState,setLoginState] = useState(false)
 
   const [user, setUser] = useState();
   const logout = () => setUser(undefined);
-  
+
   return (
     <div className="App">
       {/* Header */}
@@ -36,19 +36,29 @@ function App() {
           </div>
         {/* ! Header */}
 
+        <div className="nav__content">
+          <ul>
+            <a href="/">
+              <li><h3>🕵🏼‍♀️취업정보</h3></li>
+            </a>
+            <a href="/">
+              <li><h3>✍🏼Q & A</h3></li>
+            </a>
+            <a href="/">
+              <li><h3>👩‍👩‍👧‍👧자유게시판</h3></li>
+            </a>
+          </ul>
+        </div>
+          
         {
           modal === true 
           ? <Modal modal={modal} setModal={setModal} user={user} setUser={setUser} setLoginState={setLoginState}
           ></Modal>
-          : null
+          : <Content01/>
         }
-
-      <Content/>  
-
       </Route>
 
       <Route exact path="/serch">
-
       </Route>
 
       <Route exact path="/write">

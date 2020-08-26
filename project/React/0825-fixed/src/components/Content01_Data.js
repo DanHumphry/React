@@ -4,7 +4,8 @@ export default[
     {
         title:'apple coding',
         content:'어쩌구저꺼구',
-        img : Image01
+        img : Image01,
+        languge : 'python react Java C C++',
     },
     {
         title: 'wecode 어쩌구저쩌구',

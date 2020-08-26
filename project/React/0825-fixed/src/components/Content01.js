@@ -1,8 +1,21 @@
 import React, { useState } from 'react'
 import Data from './Content01_Data'
+
 function Content01(){
 
     let [filterList, setFilterList] = useState([{language: 'Python'}, {language : 'React'}, {language : 'Java'}, {language :'C#'}, {language:'C'}, {language:'C++'}, {language:'GO'}, {language:'Javascript'}, {language:'Html,CSS'}])
+
+    let [filter, setfilter] = useState("")
+
+    const handleChange = (e) => {
+      setfilter({ filter: e.target.value });
+    };
+    const lowercasedFilter = filter.toLowerCase();
+    const filteredData = Data.filter(item => {
+      return Object.keys(item).some(key =>
+        item[key].toLowerCase().includes(lowercasedFilter)
+      );
+    });
 
     return(
     <div className="gLLJLX">
@@ -15,7 +28,7 @@ function Content01(){
                   <div className="dvLbCX">
                     <a href="/">
                       <div>
-                        <img src={a.img}></img>
+                        <img src={a.img} alt=""></img>
                       </div>
                     <div className="eBFCWh">
                         <h4>{a.title}</h4>
@@ -35,7 +48,15 @@ function Content01(){
         <aside className="pDRpR">
           <div className="eyrfCG">
             <div className="filter__head">
-              <h2>강의정보</h2>
+              <a href="/">
+                <h2>강의정보</h2>
+              </a>
+              <a href="/">
+                <h2>부트캠프정보</h2>
+              </a>
+              <a href="/">
+                <h2>직접추천해요</h2>
+              </a>
             </div>
             <section>
               <ul>
@@ -62,6 +83,19 @@ function Content01(){
             </section>
           </div>  
         </aside>
+
+      <div>
+        <input value={filter} onChange={handleChange} />
+        {filteredData.map(item => (
+          <div key={item.email}>
+            <div>
+              {item.fname} {item.lname} - {item.gender} - {item.email}
+            </div>
+          </div>
+        ))}
+      </div>
+
+
     </div>
     )
 }

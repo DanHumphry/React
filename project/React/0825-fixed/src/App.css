@@ -226,7 +226,6 @@ box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 12px 0px;
     height: 7rem;
 }
 
-
 .foot{
   text-align: right;
 }
@@ -350,7 +349,7 @@ box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 12px 0px;
 }
 
 .gLLJLX {
-  margin-top: 80px;
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   margin-left: 7%;
@@ -360,6 +359,7 @@ box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 12px 0px;
 }
 .BAccj ul li{
   margin-right: 30px;
+  margin-top: 25px;
 }
 .pDRpR {
   margin-left: 3rem;
@@ -473,4 +473,19 @@ section{
 }
 .filter__head2{
   margin-top: 425px;
+}
+.nav__content ul li{
+  float: left;
+  position: relative;
+  left: 25%;
+  margin-right: 5%;
+}
+.nav__content ul li h3{
+  font-size: 25px;
+  color: #333;
+  font-weight: 400;
+}
+.filter__head a h2{
+  width: 200px;
+  margin-top: 40px;
 }

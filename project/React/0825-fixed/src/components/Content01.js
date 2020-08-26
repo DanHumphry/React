@@ -5,24 +5,14 @@ function Content01(){
 
     let [filterList, setFilterList] = useState([{language: 'Python'}, {language : 'React'}, {language : 'Java'}, {language :'C#'}, {language:'C'}, {language:'C++'}, {language:'GO'}, {language:'Javascript'}, {language:'Html,CSS'}])
 
-    let [filter, setfilter] = useState("")
-
-    const handleChange = (e) => {
-      setfilter({ filter: e.target.value });
-    };
-    const lowercasedFilter = filter.toLowerCase();
-    const filteredData = Data.filter(item => {
-      return Object.keys(item).some(key =>
-        item[key].toLowerCase().includes(lowercasedFilter)
-      );
-    });
-
     return(
     <div className="gLLJLX">
         <main className="BAccj">
             <ul>
             {
-              Data.map((a,i)=>{
+              Data.map((a, i)=>{
+                // console.log(filterList[i].language)
+                // a.language.includes(filterList[i].language)
                 return(
                 <li>
                   <div className="dvLbCX">
@@ -55,7 +45,7 @@ function Content01(){
                 <h2>부트캠프정보</h2>
               </a>
               <a href="/">
-                <h2>직접추천해요</h2>
+                <h2>개인 포스팅 추천</h2>
               </a>
             </div>
             <section>
@@ -83,18 +73,6 @@ function Content01(){
             </section>
           </div>  
         </aside>
-
-      <div>
-        <input value={filter} onChange={handleChange} />
-        {filteredData.map(item => (
-          <div key={item.email}>
-            <div>
-              {item.fname} {item.lname} - {item.gender} - {item.email}
-            </div>
-          </div>
-        ))}
-      </div>
-
 
     </div>
     )

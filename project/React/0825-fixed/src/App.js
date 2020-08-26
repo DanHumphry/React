@@ -2,16 +2,16 @@ import React, {useState} from 'react';
 import './App.css';
 import { Link, Route } from 'react-router-dom';
 import Modal from './components/Modal'
-import Dashboard from './components/Dashboard'
+import Dashboard from './components/Dashboard';
+import Content from './components/Content01';
 
 function App() {
   let [modal, setModal] = useState(false);
-  let [LoginState,setLoginState] = useState(false)
+  let [LoginState, setLoginState] = useState(false)
 
   const [user, setUser] = useState();
-
   const logout = () => setUser(undefined);
-
+  
   return (
     <div className="App">
       {/* Header */}
@@ -42,6 +42,9 @@ function App() {
           ></Modal>
           : null
         }
+
+      <Content/>  
+
       </Route>
 
       <Route exact path="/serch">

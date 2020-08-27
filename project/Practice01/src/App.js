@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import UserDAO from './UserDAO';
 
 function App() {
 
-  let [poster, setPoster] = useState([])
   let [User, setUser] = useState([])
-  let [title, setTitle] = useState("")
-  let [genre, setGenre] = useState("")
-  let [year, setYear] = useState()
 
-  let data = {title : title, genre : genre, year : year}
+  let [email, setEmail] = useState("")
+  let [password, setPassword] = useState("")
+  let [name, setName] = useState("")
+
+  const data = {email : email, password : password, name : name}
 
   useEffect(()=>{
     (async ()=> {
       try{
-        fetch('http://localhost:8000/movies/')
+        fetch('http://localhost:8000/User/')
         .then((res)=>res.json())
         .then((posts)=>{
-          setPoster(posts)
+          setUser(posts)
         })
       } catch(e){
         console.log(e)
@@ -29,40 +28,41 @@ function App() {
   return (
     <>
       {
-        poster.map((a)=>{
-          return(
-            <>
-            <h1>{a.title}</h1>
-            <h1>{a.genre}</h1>
-            <h1>{a.year}</h1>
-            </>
-          )
-        })
+            User.map((a)=>{
+            return(
+                <div key={a.email}>
+                <h1>{a.email}</h1>
+                <h1>{a.password}</h1>
+                <h1>{a.name}</h1>
+                </div>
+            )
+            })
       }
+
       <form>
-        <input type="text" placeholder="title" onChange={(e)=>{
-          setTitle(e.target.value)
+        <input type="email" onChange={(e)=>{
+          setEmail(e.target.value)
         }}></input>
-        <input type="text" placeholder="genre" onChange={(e)=>{
-          setGenre(e.target.value)
+        <input type="text" onChange={(e)=>{
+          setPassword(e.target.value)
         }}></input>
-        <input type="text" placeholder="year" onChange={(e)=>{
-          setYear(e.target.value)
+        <input type="text" onChange={(e)=>{
+          setName(e.target.value)
         }}></input>
         <button onClick={()=>{
-          fetch('http://localhost:8000/movies/', {
+          let CopyUser = [...User]
+          CopyUser.unshift({email : email, password : password, name : name})
+          setUser(CopyUser)
+          fetch(('http://localhost:8000/User/'), {
             method: 'POST',
             headers:{
               'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
           }).then(res => res.json())
-          .then(response => console.log('Success:', JSON.stringify(response)))
-          .catch(error => console.error('Error:', error));
+          .catch(error => console.log('Error:', error))
         }}>전송</button>
       </form>
-
-      <UserDAO User={User} setUser={setUser}/>
     </>
   );
 }

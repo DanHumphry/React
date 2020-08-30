@@ -2,6 +2,7 @@
 
 .login-container{
     margin: 0 auto;
+    margin-top: 10%;
   }
   
   .login-box{
@@ -36,15 +37,10 @@
   }
 
 /* + LoginModal */
-  
-  .social-box div button{
-    width: 9rem;
-    height: 3rem;
-    margin-top: 2rem;
-  }
   .social-box h4{
       margin-top: 1rem;
       color: rgba(102, 112, 139, 0.781);
+      text-align: center;
   }
   .login-foot{
       text-align: right;
@@ -65,9 +61,14 @@
     margin-left: 370px;
     margin-top: 5px;
   }
-
   .googlebox{
       display: flex;
       justify-content: center;
       align-items: center;
+  }
+  .googlebox .google-login{
+    width: 30px;
+    height: 30px;
+    margin-top: 25px;
+    margin-bottom: 20px;
   }

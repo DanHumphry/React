@@ -71,4 +71,8 @@ a {
 	text-decoration: none;
 }
 
+.auto-margin{
+	margin-left: 1rem;
+    margin-right: 1rem;
+}
 /* ! -- Default -- */

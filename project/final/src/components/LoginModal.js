@@ -1,16 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router'
 import '../css/LoginModal.css';
 import GoogleLogin from 'react-google-login';
 
-function LoginModal(){
-
+function LoginModal(props){
   let [JoinLoign,setJoinLogin] = useState('로그인')
   const history = useHistory()
 
-  let responseGoogle = ()=>{
-
+  let responseGoogle = (res)=>{
+    props.setOnUser([{name: res.profileObj.name, image: res.profileObj.imageUrl}])
+    props.setModal(true)
+    history.goBack()
   }
+
+  const [users,setUsers] = useState([])
+
+  const [ID, setID] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [joinID, setJoinID] = useState("")
+  const [joinPassword, setJoinPassword] = useState("")
+  const data = {ID : joinID, password : joinPassword}
+
+  const handleClick = () => {
+    try {
+      login({ ID, password });
+    } 
+    catch (e) {
+      setID('');
+      setPassword('');
+    }
+  };
+
+  const login = ({ ID, password }) => props.setOnUser([signIn({ ID, password })]);
+
+  function signIn({ ID, password }) {
+    const user = users.find(user => user.ID === ID && user.password === password);
+    if (user === undefined) throw new Error();
+    else {
+      history.push('/')
+      props.setModal(true)
+    }
+    return user;
+  }
+
+  useEffect(()=>{
+    (async ()=> {
+      try{
+        fetch('http://localhost:8000/User/')
+        .then((res)=>res.json())
+        .then((posts)=>{
+          setUsers(posts)
+        })
+      } catch(e){
+        console.log(e)
+      }
+    })();
+  },[])
+
+  
+  
   return(
     <>
       <div className="login-container">
@@ -26,14 +75,39 @@ function LoginModal(){
               JoinLoign === '로그인'
               ?(
                 <>
-                <input type="text" placeholder="아이디를 입력하세요"/>
-                <input type="text" placeholder="비밀번호를 입력하세요"/>
+                <input type="text" placeholder="아이디를 입력하세요" onChange={(e)=>{
+                  setID(e.target.value)
+                }}/>
+                <input type="password" placeholder="비밀번호를 입력하세요" onChange={(e)=>{
+                  setPassword(e.target.value)
+                }}/>
+                <button className="JoinLoign-button" onClick={(e)=>{
+                  e.preventDefault()
+                  handleClick()
+                }}>{JoinLoign}</button>
                 </>
               )
               :(
                 <>
-                <input type="text" placeholder="아이디를 입력하세요"/>
-                <input type="text" placeholder="비밀번호를 입력하세요"/>
+                <input type="text" placeholder="아이디를 입력하세요" onChange={(e)=>{
+                  setJoinID(e.target.value)
+                }}/>
+                <input type="password" placeholder="비밀번호를 입력하세요" onChange={(e)=>{
+                  setJoinPassword(e.target.value)
+                }}/>
+                <button className="JoinLoign-button" onClick={()=>{
+                  fetch('http://localhost:8000/User/', {
+                    method: 'POST',
+                    headers:{
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                  }).then(res => res.json())
+                  .then(response => console.log('Success:', JSON.stringify(response)))
+                  .catch(error => console.error('Error:', error));
+                  history.push('/')
+                  props.setModal(true)
+                }}>{JoinLoign}</button>
                 </>
               )
             }

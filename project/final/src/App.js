@@ -6,17 +6,20 @@ import { Route } from 'react-router-dom';
 import './App.css'
 
 function App() {
-  const [userName, setUserName] = useState("")
+  const [OnUser, setOnUser] = useState()
+
   const [modal, setModal] = useState(false);
   return (
     <div className="App">
       <div className="auto-margin">
 
         <Route exact path="/">
-          <Header modal={modal} setModal={setModal} userName={userName} setUserName={setUserName}/>
+          <Header modal={modal}/>
         </Route>
 
-        <Route exact path="/login" component={LoginModal}></Route>
+        <Route exact path="/login">
+          <LoginModal setOnUser={setOnUser} setModal={setModal}/>
+        </Route>
 
         <Route exact path="/">
           <Navi/>

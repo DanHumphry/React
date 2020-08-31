@@ -10,16 +10,16 @@ function LoginModal(props){
   let responseGoogle = (res)=>{
     props.setOnUser([{name: res.profileObj.name, image: res.profileObj.imageUrl}])
     props.setModal(true)
-    history.goBack()
+    history.push('/')
   }
 
   const [users,setUsers] = useState([])
 
   const [ID, setID] = useState('');
   const [password, setPassword] = useState('');
-
   const [joinID, setJoinID] = useState("")
   const [joinPassword, setJoinPassword] = useState("")
+
   const data = {ID : joinID, password : joinPassword}
 
   const handleClick = () => {

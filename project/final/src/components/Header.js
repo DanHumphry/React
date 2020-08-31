@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import '../css/Header.css'
-import nomalImage from '../img/red.jpg'
+import '../css/Header.css';
+import nomalImage from '../img/red.jpg';
+
 function Header(props){
 
   const [userprofile, setUserprofile] = useState(false)
@@ -19,10 +20,10 @@ function Header(props){
               ? <Link to="/login"><button className="header-btn">로그인</button></Link>
               : (
                 <>
-                <Link className="header-dashboard" to="/dashboard"><button>새 글 작성</button></Link>
+                <Link className="header-dashboard" to="/board"><button>새 글 작성</button></Link>
                 <div className="user-container" onClick={()=>{setUserprofile(!userprofile)}}>
                   <img src={nomalImage} className="user-image" alt="/"></img>
-                  <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 10l5 5 5-5z"></path>
                   </svg>
                 </div>
@@ -43,7 +44,6 @@ function Header(props){
                 </>
               )
             }
-            
           </div>
         </div>
       </div>

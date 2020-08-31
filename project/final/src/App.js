@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Header from './components/Header';
 import Navi from './components/Navi'
+import Board from './components/Board';
 import LoginModal from './components/LoginModal';
 import { Route } from 'react-router-dom';
 import './App.css'
@@ -24,6 +25,10 @@ function App() {
         <Route exact path="/">
           <Navi/>
         </Route>
+
+      <Route exact path="/board">
+        <Board/>
+      </Route>
   
       </div>
     </div>

@@ -33,7 +33,7 @@ function Header(props){
                       <div className="profile-menu">
                         <Link to="/"><div className="menu">내가 쓴 글</div></Link>
                         <Link to="/"><div className="menu">임시 글</div></Link>
-                        <Link to="/"><div className="menu">내 정보</div></Link>
+                        <Link to="/profile"><div className="menu">내 정보</div></Link>
                         <Link onClick={props.handleLogout} to="/"><div className="menu">로그아웃</div></Link>
                       </div>
                     </div>

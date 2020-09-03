@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Header from './components/Header';
 import Navi from './components/Navi'
 import Board from './components/Board';
+import Profile from './components/Profile';
 import LoginModal from './components/LoginModal';
 import { Route } from 'react-router-dom';
 import './App.css'
@@ -24,7 +25,7 @@ function App() {
     else{
       setModal(false)
     }
-  },[isAuthenticated])
+  },[user,isAuthenticated])
   
   const handleLogout = () => {
     //로그아웃
@@ -102,6 +103,11 @@ function App() {
 
       <Route exact path="/board">
         <Board/>
+      </Route>
+
+      <Route exact path="/profile">
+        <Header modal={modal} handleLogout={handleLogout}/>
+        <Profile/>
       </Route>
       </div>
     </div>

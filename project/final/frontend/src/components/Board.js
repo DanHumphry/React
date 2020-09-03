@@ -15,7 +15,7 @@ function Board(){
                 <textarea name="" id="" cols="30" rows="10" placeholder="내용을 입력하세요"></textarea>
             </div>
             <footer className="post-comment">
-                <button className="exit-btn transparent-btn" onClick={histoty.goBack()}>✔ 나가기</button>
+                <button className="exit-btn transparent-btn" onClick={()=>{histoty.goBack()}}>✔ 나가기</button>
                 <div>
                 <button className="transparent-btn">발행</button>
                 </div>

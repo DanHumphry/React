@@ -2,25 +2,58 @@ import React, { useState } from 'react';
 import '../css/Profile.css'
 
 function Profile(){
+    let [infoModal, setInfomodal] = useState(false)
     let [nicknmaModal, setNickname] = useState(false)
     let [socialModal, setSocialModal] = useState(false)
+
+    let [profileImg, setProfileImg] = useState()
+    let [profileURL, setProfileURL] = useState()
     return(
         <>
-            <main>
+            <main className="profile-main">
                 <section className="section1">
                     <div className="thumbnail">
-                        <img src="" alt="profile"></img>
-                        <button className="img-up">이미지 업로드</button>
+                        <img src={profileURL} alt="profile"></img>
+                        <label htmlFor="file" className="img-up">
+                            <input type="file" id="file" accept=".jpg, .png, .jpeg, .gif" onChange={(e)=>{
+                                e.preventDefault();
+                                let reader = new FileReader();
+                                let file = e.target.files[0];
+                                reader.onloadend = () => {
+                                setProfileImg(file)
+                                setProfileURL(reader.result)
+                                }
+                                reader.readAsDataURL(file);
+                            }}></input>    
+                        이미지 업로드</label>
                         <button className="img-de">이미지 제거</button>
                     </div>
                     <div className="profile-info">
-                        <h2>자기소개란</h2>
-                        <button>수정</button>
+                        {
+                            infoModal === true
+                            ?(
+                                <form>
+                                    <input></input>
+                                    <div className="button-wrapper">
+                                        <button className="save-button" onClick={()=>{
+                                            setInfomodal(false)
+                                        }}>저장</button>
+                                    </div>
+                                </form>
+                            )
+                            :(
+                                <>
+                                <h2>자기소개란</h2>
+                                <button className="fix-button" onClick={()=>{
+                                    setInfomodal(true)
+                                }}>수정</button>
+                                </>
+                            )
+                        }
                     </div>
                 </section>
 
                 <section className="section2">
-
                     <div className="myProfile">
                         <div className="wrapper">
                             <div className="title-wrapper">

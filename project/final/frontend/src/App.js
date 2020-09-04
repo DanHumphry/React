@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Navi from './components/Navi'
 import Board from './components/Board';
 import Profile from './components/Profile';
+import Mysite from './components/Mysite';
 import LoginModal from './components/LoginModal';
 import { Route } from 'react-router-dom';
 import './App.css'
@@ -25,7 +26,7 @@ function App() {
     else{
       setModal(false)
     }
-  },[user,isAuthenticated])
+  },[isAuthenticated])
   
   const handleLogout = () => {
     //로그아웃
@@ -34,7 +35,6 @@ function App() {
       localStorage.removeItem('token');
       setModal(false)
   }
-
   useEffect(() => {
     // 토큰(access token)이 이미 존재하는 상황이라면 서버에 GET /validate 요청하여 해당 access token이 유효한지 확인
     if (isAuthenticated) {
@@ -85,6 +85,13 @@ function App() {
     }
   },[isAuthenticated])
 
+  useEffect(()=>{
+    if(user === undefined){
+      setModal(false)
+      setisAuthenticated(false)
+    }
+  },[user])
+
   return (
     <div className="App">
       <div className="auto-margin">
@@ -108,6 +115,11 @@ function App() {
       <Route exact path="/profile">
         <Header modal={modal} handleLogout={handleLogout}/>
         <Profile/>
+      </Route>
+
+      <Route exact path="/mysite">
+        <Header modal={modal} handleLogout={handleLogout}/>
+        <Mysite/>
       </Route>
       </div>
     </div>

@@ -13,7 +13,6 @@ function Header(props){
         <div className="header-nav">
           <div className="header-nav-links">
             <Link className="header-logo" to="/">Velog</Link>
-            <Link className="header-search" to="/serch"><button><span role = "img" aria-label = "물음표">❔</span></button></Link>
             {
               props.modal === false
               ? <Link to="/login"><button className="header-btn">로그인</button></Link>
@@ -31,7 +30,7 @@ function Header(props){
                   ?(
                     <div className="user-profile">
                       <div className="profile-menu">
-                        <Link to="/"><div className="menu">내가 쓴 글</div></Link>
+                        <Link to="/mysite"><div className="menu">내가 쓴 글</div></Link>
                         <Link to="/"><div className="menu">임시 글</div></Link>
                         <Link to="/profile"><div className="menu">내 정보</div></Link>
                         <Link onClick={props.handleLogout} to="/"><div className="menu">로그아웃</div></Link>

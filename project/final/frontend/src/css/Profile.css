@@ -17,7 +17,7 @@ h2 {
 section {
     display: block;
 }
-main{
+.profile-main{
     margin-top: 3rem;
     margin-left: auto;
     margin-right: auto;
@@ -28,7 +28,7 @@ form {
     display: block;
     margin-top: 0em;
 }
-input {
+.section2 input {
     text-rendering: auto;
     color: -internal-light-dark(black, white);
     letter-spacing: normal;
@@ -89,6 +89,14 @@ svg {
     margin-bottom: 1.25rem;
     border-radius: 50%;
 }
+.img-up input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
 .section1 .thumbnail .img-up{
     display: inline-flex;
     -webkit-box-align: center;
@@ -146,7 +154,7 @@ svg {
     color: rgb(52, 58, 64);
     margin: 0px;
 }
-.section1 .profile-info button{
+.section1 .profile-info .fix-button{
     display: inline;
     font-size: 1rem;
     line-height: 1.5;
@@ -163,6 +171,20 @@ svg {
 }
 /* section1 */
 
+/* section1  form*/
+.profile-info form input{
+    display: block;
+    border: 1px solid rgb(222, 226, 230);
+    background: white;
+    padding: 0.5rem;
+    color: rgb(73, 80, 87);
+    font-size: 1rem;
+    line-height: 1rem;
+    outline: none;
+    border-radius: 4px;
+    width: 100%;
+}
+/* section1  form*/
 
 /* section2 */
 .section2{

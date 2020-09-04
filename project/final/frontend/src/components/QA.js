@@ -1,0 +1,86 @@
+import React from 'react';
+import {Link} from 'react-router-dom';
+import '../css/QA.css'
+
+function QA(){
+    return(
+        <div className="container">
+            <div className="content-left">
+                <div className="head">
+                    <main className="site-main">
+                        <article className="post-page">
+                            <header className="entry-header">
+                                <h1>Q&A</h1>
+                                <h1>자유게시판</h1>
+                                <div className="header-underline"></div>
+                            </header>
+                            <div className="entry-content">
+                                <div className="content-list">
+                                    <div className="list-header">
+                                        <div className="board-sort">
+                                            <form>
+                                                <select className="list-sort">
+                                                    <option value="newest">최신순</option>
+                                                    <option value="best">추천순</option>
+                                                    <option value="viewed">조회순</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div className="board-list">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <td className="title">제목</td>
+                                                    <td className="user">작성자</td>
+                                                    <td className="comment">댓글</td>
+                                                    <td className="vote">추천</td>
+                                                    <td className="view">조회</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td className="title">제목테스트</td>
+                                                    <td className="user">test123</td>
+                                                    <td className="comment">0</td>
+                                                    <td className="vote">1</td>
+                                                    <td className="view">5</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className="pagination">
+                                        <ul>
+                                            <li><Link to="/">1</Link></li>
+                                            <li><Link to="/">2</Link></li>
+                                            <li><Link to="/">3</Link></li>
+                                            <li><Link to="/">4</Link></li>
+                                            <li><Link to="/">5</Link></li>
+                                            <li><Link className="next-page">»</Link></li>
+                                            <li><Link className="last-page">마지막</Link></li>
+                                        </ul>
+                                    </div>
+                                    <div className="search">
+                                        <form>
+                                            <select>
+                                                <option>전체</option>
+                                                <option value="title">제목</option>
+                                                <option value="username">작성자</option>
+                                            </select>
+                                            <input type="text"></input>
+                                            <button type="submit" className="searchADNcontrol">검색</button>
+                                        </form>
+                                    </div>
+                                    <div className="control">
+                                        <Link to="/" className="searchADNcontrol">글쓰기</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </main>
+                </div>
+            </div>
+        </div>
+    )
+}
+export default QA

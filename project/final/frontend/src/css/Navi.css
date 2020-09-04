@@ -6,6 +6,7 @@
     -webkit-box-align: center;
     align-items: center;
     position: relative;
+    padding: 0 40px;
 }
 .navi-box{
     display: flex;

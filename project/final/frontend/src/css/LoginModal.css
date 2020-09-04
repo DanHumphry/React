@@ -34,6 +34,7 @@
     outline: none;
     background: rgba(var(--b3f,250,250,250),1);
     border-radius: 5px;
+    padding: 16px;
   }
 
 /* + LoginModal */

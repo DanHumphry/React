@@ -7,13 +7,14 @@ function Profile(){
     let [socialModal, setSocialModal] = useState(false)
 
     let [profileImg, setProfileImg] = useState()
-    let [profileURL, setProfileURL] = useState()
+    let [profileURL, setProfileURL] = useState(null)
+    console.log(profileImg)
     return(
         <>
             <main className="profile-main">
                 <section className="section1">
-                    <div className="thumbnail">
-                        <img src={profileURL} alt="profile"></img>
+                    <div className="thumbnail__">
+                        <img src={profileURL} alt=""></img>
                         <label htmlFor="file" className="img-up">
                             <input type="file" id="file" accept=".jpg, .png, .jpeg, .gif" onChange={(e)=>{
                                 e.preventDefault();
@@ -26,7 +27,10 @@ function Profile(){
                                 reader.readAsDataURL(file);
                             }}></input>    
                         이미지 업로드</label>
-                        <button className="img-de">이미지 제거</button>
+                        <button className="img-de" onClick={()=>{
+                            setProfileImg(null)
+                            setProfileURL(null)
+                        }}>이미지 제거</button>
                     </div>
                     <div className="profile-info">
                         {

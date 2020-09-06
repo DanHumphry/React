@@ -2,6 +2,12 @@
     margin: 0;
     padding: 0;
   }
+  .container-section{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    animation: 0.5s ease 0s 1 normal forwards running bcCCNc;
+  }
   button.transparent-btn{
     background-color: transparent;
     border: 0;
@@ -15,65 +21,95 @@
     cursor: pointer;
     outline: none;
   }
-  .container{
-    width: 100%;
-    background-color: white;
-  }
-  
-  
-  article.write {
-    width: 860px;
-    margin: 20px auto;
-    margin-top: 100px;
-    margin-bottom: 10px;
-    background-color: #fff;
-  }
-  
   .post-title {
     width: 100%;
-    margin-bottom: 100px;
   }
-  
   article > div.post-title > textarea {
     display: block;
     width: 100%;
-    height: 42px;
+    height: 5rem;
     font-size: 26px;
     border: none;
     outline: 0 none;
     resize: none;
     color: #202020;
-    line-height: 40px;
+    line-height: 45px;
     border-bottom: 1px solid rgba(0,0,0,.05);
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 10px;
+    padding-top: 14px;
   }
   
-  
-  
-  .post-content{
-    width: 100%;
-    padding: 0 0 20px;
-    font-size: 16px;
-  }
-  
-  .post-content > textarea{
+
+/* write */
+.post-tag input{
+  display: block;
+  width: 100%;
+  height: 3rem;
+  font-size: 14px;
+  border: none;
+  outline: 0 none;
+  resize: none;
+  color: #202020;
+  line-height: 40px;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+  padding-left: 40px;
+}
+.write-container{
+    min-width: 0px;
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    box-shadow: rgba(0, 0, 0, 0.016) 0px 0px 8px;
+    height: 100%;
+}
+.post-contents{
+  flex: 1 1 0%;
+    min-height: 0px;
+    display: flex;
+    flex-direction: column;
+}
+.post-textarea{
     display: block;
     width: 100%;
-    height: 500px;
-    font-size: 15px;
+    height: 829px;
+    font-size: 20px;
     border: none;
     outline: 0 none;
     resize: none;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 50px;
-  }
-  
+    padding-top: 15px;
+}
+.tag-class{
+    position: absolute;
+    font-size: 1rem;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 2rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: rgb(241, 243, 245);
+    color: rgb(12, 166, 120);
+    margin-right: 0.75rem;
+    transition: all 0.125s ease-in 0s;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    animation: 0.125s ease-in-out 0s 1 normal forwards running iMKika;
+}
+/* write */
+
+
+
+  /* footer */
   footer.post-comment{
     position: relative;
-    margin-top: 51px;
     height: 70px;
     border: 1px solid #e0e0e0;
     background-color: #fff;
@@ -94,7 +130,7 @@
     transform: translateY(-50%);
   }
   
-  footer.post-comment > div > button{
+  .transparent-btn{
     color: #0095f6;
     font-size: 18px;
     opacity: 0.5;
@@ -105,3 +141,4 @@
   footer.post-comment > div > button:hover{
     opacity: 1;
   }
+    /* footer */

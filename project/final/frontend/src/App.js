@@ -109,7 +109,7 @@ function App() {
         </Route>
 
       <Route exact path="/board">
-        <Board/>
+        <Board user={user}/>
       </Route>
 
       <Route exact path="/profile">
@@ -121,6 +121,7 @@ function App() {
         <Header modal={modal} handleLogout={handleLogout}/>
         <Mysite/>
       </Route>
+
       </div>
     </div>
   );

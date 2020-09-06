@@ -1,66 +1,66 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import '../css/Trend.css';
+import Data from './Trend-data';
 function Trend(){
-    let [filterList, setFilterList] = useState([{language: 'Python'}, {language : 'React'}, {language : 'Java'}, {language :'C#'}, {language:'C'}, {language:'C++'}, {language:'GO'}, {language:'Javascript'}, {language:'Html,CSS'}])
-   
+    let [filterList] = useState([{id : 1, language: 'Python'}, {id : 2, language : 'React'}, {id : 3, language : 'Java'}, {id : 4, language :'C#'}, {id : 5, language:'C'}, {id : 6, language:'C++'}, {id : 7, language:'GO'}, {id : 8, language:'Javascript'}, {id : 9, language:'Html,CSS'}])
+
     return(
         <div className="trend-section">
             <main className="trend-main">
                 <div className="main-section">
                     <div className="article">
-                        <Link to="/">
-                            <div className="arcticle-img">
-                                <img src="/" alt=""></img>
-                            </div>
-                        </Link>
-                        <div className="article-content">
-                            <Link to="/">
-                                <h4>Title</h4>
-                                <div className="desc-wrapper">
-                                    <p>Desc</p>
-                                </div>
-                            </Link>
-                            <div className="sub-info">
-                                <span>현재날자</span>
-                                <span className="separator">·</span>
-                                <span>"5"개의 댓글</span>
-                            </div>
-                        </div>
-                        <div className="article-footer">
-                            <Link to="/">
-                                <img src="/" alt=""></img>
-                                <span>"by " <b>username</b></span>
-                            </Link>
-                            <div className="likes">
-                                <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path></svg>
-                                "12"
-                            </div>
-                        </div>
+                        {
+                            Data.map((a)=>{
+                                return(
+                                    <>
+                                        <Link to="/">
+                                            <div className="arcticle-img">
+                                                <img src={a.img} alt=""></img>
+                                            </div>
+                                        </Link>
+                                        <div className="article-content">
+                                            <Link to="/">
+                                                <h4>{a.title}</h4>
+                                                <div className="desc-wrapper">
+                                                    <p>{a.desc}</p>
+                                                </div>
+                                            </Link>
+                                            <div className="sub-info">
+                                                <span>{a.date}</span>
+                                                <span className="separator">·</span>
+                                                <span>{a.comment}개의 댓글</span>
+                                            </div>
+                                        </div>
+                                        <div className="article-footer">
+                                            <Link to="/">
+                                                <img src="/" alt=""></img>
+                                                <span>"by " <b>{a.username}</b></span>
+                                            </Link>
+                                            <div className="likes">
+                                                <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18 1l-6 4-6-4-6 5v7l12 10 12-10v-7z"></path></svg>
+                                                {a.like}
+                                            </div>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </main>
             <aside className="pDRpR">
             <div className="eyrfCG">
                 <div className="filter__head">
-                <a href="/">
-                    <h2>강의정보</h2>
-                </a>
-                <a href="/">
-                    <h2>부트캠프정보</h2>
-                </a>
-                <a href="/">
-                    <h2>개인 포스팅 추천</h2>
-                </a>
                 </div>
                 <section>
                 <ul>
                     {
                     filterList.map((a)=>{
                         return(
-                        <li>
+                        <li key={a.id}>
                             <input id={a.language} className="filters-input__checkbox" value="action" type="checkbox" data-type="genres"></input>
-                            <label className="input__label | filters-input__label--checkbox" for={a.language}>
+                            <label className="input__label | filters-input__label--checkbox" htmlFor={a.language}>
                             <span>{a.language}</span>
                             <span className="filters-input__tick">
                                 <svg focusable="false" aria-hidden="true">

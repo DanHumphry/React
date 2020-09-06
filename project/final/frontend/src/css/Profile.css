@@ -76,12 +76,12 @@ svg {
     display: flex;
     height: 13.75rem;
 }
-.section1 .thumbnail{
+.section1 .thumbnail__{
     padding-right: 1.5rem;
     display: flex;
     flex-direction: column;
 }
-.section1 .thumbnail img{
+.section1 .thumbnail__ img{
     object-fit: cover;
     width: 8rem;
     height: 8rem;
@@ -97,7 +97,7 @@ svg {
     overflow: hidden;
     border: 0;
 }
-.section1 .thumbnail .img-up{
+.section1 .thumbnail__ .img-up{
     display: inline-flex;
     -webkit-box-align: center;
     align-items: center;
@@ -120,7 +120,7 @@ svg {
     background: rgb(18, 184, 134);
     border-radius: 4px;
 }
-.section1 .thumbnail .img-de{
+.section1 .thumbnail__ .img-de{
     display: inline-flex;
     -webkit-box-align: center;
     align-items: center;

@@ -12,7 +12,7 @@ function Navi(){
 
     return(
         <>
-        <div className="navi-container">
+        <div className="navi-container" key="">
             <div className="navi-box">
                 <Link className="navi-" to="/" onClick={()=>{
                     setUnderline({left:"0%"})

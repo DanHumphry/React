@@ -2,68 +2,56 @@ import React, { useState } from 'react';
 import '../css/Board.css';
 import { useHistory } from 'react-router'
 import '../css/Thumbnail.css'
-import axios from "axios";
 
 function Board(props){
+    let [filterList] = useState([{id : 1, language: 'Python'}, {id : 2, language : 'React'}, {id : 3, language : 'Java'}, {id : 4, language :'C#'}, {id : 5, language:'C'}, {id : 6, language:'C++'}, {id : 7, language:'GO'}, {id : 8, language:'Javascript'}, {id : 9, language:'Html,CSS'}])
     let Today = new Date();
     let date = Today.getFullYear() + "-" + Today.getMonth() + "-" + Today.getDate()
+    let [languagefilter, setLanguagefilter] = useState("")
 
     const histoty = useHistory()
     let [goback, setGoback] = useState(false)
     let [imgGoback, setImgGoback] = useState(false)
 
-    let [Data, setData] = useState([])
-
     let [img , setImg] = useState()
     let [imgURL, setImgURL] = useState()
     let [title , setTitle] = useState()
-    let [desc , setDesc] = useState()
+    let [content , setContent] = useState()
 
     let sendData = {
-        img : imgURL,
+        image : img,
         title : title,
-        description : desc,
-        // date : date,
-        // comment : 0,
-        // like : 0,
-        // username : props.user,
+        content : content,
+        date : date,
+        comment : 0,
+        like : 0,
+        username : props.user,
+        language : languagefilter
     }
 
+    const handleSubmit = (sendData) => {
+        let form_data = new FormData();
+        let fileField = document.querySelector('input[type="file"]');
+        form_data.append('title', sendData.title);
+        form_data.append('content', sendData.content);
+        form_data.append('date', sendData.date);
+        form_data.append('comment', sendData.comment);
+        form_data.append('language', sendData.language);
+        form_data.append('like', sendData.like);
+        form_data.append('username', sendData.username);
+        form_data.append('image', fileField.files[0])
 
-    let [todoList, setTodoList] = useState()
-
-    const handleSubmit = item => {
-        console.log(item)
-        if (item.id) {
-          axios
-            .put(`http://localhost:8000/todo/${item.id}/`, item, {
-              headers: {
-                Authorization: `JWT ${localStorage.getItem('token')}`
-              },
-            })
-            .then(res => refreshList());
-            
-          return;
-        }
-        axios
-          .post("http://localhost:8000/todo/", item, {
+        fetch("http://localhost:8000/api/Todos/", {
+            method : 'POST',
             headers: {
-              Authorization: `JWT ${localStorage.getItem('token')}`
+                Authorization : `JWT ${localStorage.getItem('token')}`,
             },
-          })
-          .then(res => refreshList());
+            body : form_data
+        })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', JSON.stringify(response)));
     };
-
-    const refreshList = () => {
-        axios
-          .get("http://localhost:8000/todo/", {
-            headers: {
-              Authorization: `JWT ${localStorage.getItem('token')}`
-            },
-          })
-          .then(res => setTodoList(res.data))
-          .catch(err => console.log(err));
-      };
 
   return(
     <> 
@@ -76,7 +64,7 @@ function Board(props){
                 <textarea name="" id="" cols="30" rows="10"  placeholder="제목을 입력하세요" onChange={(e)=>{setTitle(e.target.value)}}></textarea>
             </div>
             <div className="post-contents">
-            <textarea className="post-textarea" placeholder="내용을 입력하세요" onChange={(e)=>{setDesc(e.target.value)}}></textarea>
+            <textarea className="post-textarea" placeholder="내용을 입력하세요" onChange={(e)=>{setContent(e.target.value)}}></textarea>
                 <div>
                     <div className="contents-scroll">
                         <input type="hidden" name="textType" value="HTML" id="textType"></input>
@@ -126,7 +114,7 @@ function Board(props){
                                         {
                                             imgGoback === false
                                             ? <svg width="107" height="85" fill="none" viewBox="0 0 107 85"><path fill="#868E96" d="M105.155 0H1.845A1.844 1.844 0 0 0 0 1.845v81.172c0 1.02.826 1.845 1.845 1.845h103.31A1.844 1.844 0 0 0 107 83.017V1.845C107 .825 106.174 0 105.155 0zm-1.845 81.172H3.69V3.69h99.62v77.482z"></path><path fill="#868E96" d="M29.517 40.84c5.666 0 10.274-4.608 10.274-10.271 0-5.668-4.608-10.276-10.274-10.276-5.665 0-10.274 4.608-10.274 10.274 0 5.665 4.609 10.274 10.274 10.274zm0-16.857a6.593 6.593 0 0 1 6.584 6.584 6.593 6.593 0 0 1-6.584 6.584 6.591 6.591 0 0 1-6.584-6.582c0-3.629 2.954-6.586 6.584-6.586zM12.914 73.793a1.84 1.84 0 0 0 1.217-.46l30.095-26.495 19.005 19.004a1.843 1.843 0 0 0 2.609 0 1.843 1.843 0 0 0 0-2.609l-8.868-8.868 16.937-18.548 20.775 19.044a1.846 1.846 0 0 0 2.492-2.72L75.038 31.846a1.902 1.902 0 0 0-1.328-.483c-.489.022-.95.238-1.28.6L54.36 51.752l-8.75-8.75a1.847 1.847 0 0 0-2.523-.081l-31.394 27.64a1.845 1.845 0 0 0 1.22 3.231z"></path></svg>
-                                            : <img src={imgURL}></img>
+                                            : <img src={imgURL} alt=""></img>
                                         }
                                         
                                     </div>
@@ -134,7 +122,7 @@ function Board(props){
                             </div>
                             <div className="title-margin">
                                 <h4>제목미리보기</h4>
-                                <textarea>본문미리보기</textarea>
+                                <textarea placeholder="본문미리보기"></textarea>
                             </div>
                         </div>
                     </section>
@@ -142,15 +130,39 @@ function Board(props){
                 <div className="line_section"></div>
                 <div className="right_section">
                     <div className="fillter_section">
+                    <section>
+                <ul>
+                    {
+                    filterList.map((a)=>{
+                        return(
+                        <li key={a.id}>
+                            <input id={a.language} className="filters-input__checkbox" value="action" type="checkbox" data-type="genres" onChange={()=>{
+                                let ReLang = [...languagefilter]
+                                ReLang.push(a.language)
+                                setLanguagefilter(ReLang)
+                            }}></input>
+                            <label className="input__label | filters-input__label--checkbox" htmlFor={a.language}>
+                            <span>{a.language}</span>
+                            <span className="filters-input__tick">
+                                <svg focusable="false" aria-hidden="true">
+                                <use xlinkHref="#check">
+                                    <svg viewBox="0 0 24 24" id="check" xmlns="http://www.w3.org/2000/svg"><path d="M9 21.035l-9-8.638 2.791-2.87 6.156 5.874 12.21-12.436L24 5.782z"></path></svg>
+                                </use>
+                                </svg>
+                            </span>
+                            </label>
+                        </li>
+                        )
+                    })
+                    }
+                </ul>
+                </section>
                     </div>
                     <div>
                         <button className="upButton" onClick={()=>{
-                            let copyData = [...Data]
-                            copyData.push(sendData)
-                            setData(copyData)
                             handleSubmit(sendData)
-                            // setGoback(false)
-                            // histoty.goBack()
+                            setGoback(false)
+                            histoty.goBack()
                         }}>출간하기</button>
                     </div>
                 </div>

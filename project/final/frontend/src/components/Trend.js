@@ -1,22 +1,37 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import '../css/Trend.css';
-import Data from './Trend-data';
+
 function Trend(){
     let [filterList] = useState([{id : 1, language: 'Python'}, {id : 2, language : 'React'}, {id : 3, language : 'Java'}, {id : 4, language :'C#'}, {id : 5, language:'C'}, {id : 6, language:'C++'}, {id : 7, language:'GO'}, {id : 8, language:'Javascript'}, {id : 9, language:'Html,CSS'}])
+    let [todolist, setTodoList] = useState([])
+
+    // views.py에서 권한이 없이 데이터조회를 가능하게 했기때문에 posts의 정보를 불러올 수 있다.
+    useEffect(()=>{
+        (async ()=> {
+        try{
+            fetch('http://localhost:8000/api/Todos/')
+            .then((res)=>res.json())
+            .then((posts)=>{
+                setTodoList(posts)
+            })
+        } catch(e){
+            console.log(e)
+        }
+        })();
+    },[])
 
     return(
         <div className="trend-section">
             <main className="trend-main">
                 <div className="main-section">
-                    <div className="article">
                         {
-                            Data.map((a)=>{
+                            todolist.map((a)=>{
                                 return(
-                                    <>
+                                    <div className="article" key={a.id}>
                                         <Link to="/">
                                             <div className="arcticle-img">
-                                                <img src={a.img} alt=""></img>
+                                                <img src={a.image} alt=""></img>
                                             </div>
                                         </Link>
                                         <div className="article-content">
@@ -42,11 +57,10 @@ function Trend(){
                                                 {a.like}
                                             </div>
                                         </div>
-                                    </>
+                                    </div>
                                 )
                             })
                         }
-                    </div>
                 </div>
             </main>
             <aside className="pDRpR">

@@ -30,7 +30,7 @@ urlpatterns = [
     path('refresh/', refresh_jwt_token),
     
     path('user/', include('user.urls')),
-    path('todo/', include('todo.urls'))
+    path('api/', include('post.urls')),
 ]
 urlpatterns += \
     static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

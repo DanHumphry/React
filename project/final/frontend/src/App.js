@@ -19,6 +19,7 @@ function App() {
     localStorage.setItem('token', token);
   }
 
+  //회원가입이나 로그인이 성공했을 때 modal을 변경해 로그인 버튼을 없애고 글쓰기 버튼과 정보버튼을 나오게하는 setModal
   useEffect(()=>{
     if(isAuthenticated){
       setModal(true)
@@ -85,6 +86,8 @@ function App() {
     }
   },[isAuthenticated])
 
+  // 가끔 렉이걸려 user가 자동으로 로그아웃되어 undefined가 됬는데 modal이 true로 되어있어서 
+  // 유저가 undefined일 때 항상 modal은 false가되게 설정
   useEffect(()=>{
     if(user === undefined){
       setModal(false)

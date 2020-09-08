@@ -6,11 +6,13 @@ import Profile from './components/Profile';
 import Mysite from './components/Mysite';
 import LoginModal from './components/LoginModal';
 import { Route } from 'react-router-dom';
-import './App.css'
+import './App.css';
+import Write from './components/Write';
 
 function App() {
   const [modal, setModal] = useState(false);
   const [user, setUser] = useState()
+  const [userImg, setUserImg] = useState()
   let [isAuthenticated, setisAuthenticated] = useState(localStorage.getItem('token') ? true : false)
 
   const userHasAuthenticated = (authenticated, username, token) => { //회원가입이나 로그인이 성공했을 때 토큰을 저장
@@ -117,12 +119,16 @@ function App() {
 
       <Route exact path="/profile">
         <Header modal={modal} handleLogout={handleLogout}/>
-        <Profile/>
+        <Profile userImg={userImg} setUserImg={setUserImg}/>
       </Route>
 
       <Route exact path="/mysite">
         <Header modal={modal} handleLogout={handleLogout}/>
         <Mysite/>
+      </Route>
+
+      <Route exact path="/write">
+        <Write user={user}/>
       </Route>
 
       </div>

@@ -31,14 +31,14 @@ function Trend(){
                                     <div className="article" key={a.id}>
                                         <Link to="/">
                                             <div className="arcticle-img">
-                                                <img src={a.image} alt=""></img>
+                                                <img src={"http://localhost:8000" + a.image} alt=""></img>
                                             </div>
                                         </Link>
                                         <div className="article-content">
                                             <Link to="/">
                                                 <h4>{a.title}</h4>
                                                 <div className="desc-wrapper">
-                                                    <p>{a.desc}</p>
+                                                    <p>{a.content}</p>
                                                 </div>
                                             </Link>
                                             <div className="sub-info">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Profile.css'
 
 function Profile(){
@@ -9,6 +9,23 @@ function Profile(){
     let [profileImg, setProfileImg] = useState()
     let [profileURL, setProfileURL] = useState(null)
     console.log(profileImg)
+
+    let [userProfile, setUserProfile] = useState()
+
+    // let url =  'http://localhost:8000/user/auth/profile/' + <user_pk> + '/update'
+    useEffect(()=>{
+        fetch(url,{
+            method : 'PATCH',
+            headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`
+            },
+        })
+        .then((res)=>res.json())
+        .then((posts)=>{
+            setUserProfile(posts)
+        })
+    },[])
+
     return(
         <>
             <main className="profile-main">

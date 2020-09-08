@@ -22,3 +22,15 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.title
+
+class Borad(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    image = models.ImageField(upload_to='board_images', blank=True)
+    comment = models.IntegerField(default=0)
+    like = models.IntegerField(default=0)
+    view = models.IntegerField(default=0)
+    username = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title

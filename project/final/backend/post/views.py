@@ -1,5 +1,5 @@
-from .serializers import PostSerializer, TodoSerializer
-from .models import Post, Todo
+from .serializers import PostSerializer, TodoSerializer, BoardSerializer
+from .models import Post, Todo, Borad
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
@@ -45,3 +45,23 @@ class TodoView(APIView):
         else:
             print('error', Todos_serializer.errors)
             return Response(Todos_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BoradView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        borads = Borad.objects.all()
+        serializer = BoardSerializer(borads, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        borads_serializer = BoardSerializer(data=request.data)
+        if borads_serializer.is_valid():
+            borads_serializer.save()
+            return Response(borads_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            print('error', borads_serializer.errors)
+            return Response(borads_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -19,7 +19,7 @@ function Board(props){
     let [content , setContent] = useState()
 
     let sendData = {
-        image : img,
+        image : imgURL,
         title : title,
         content : content,
         date : date,
@@ -101,7 +101,7 @@ function Board(props){
                                     reader.readAsDataURL(file);
                                     setImgGoback(true)
                                 }}></input>
-                            이미지 업로드</label></button>
+                        이미지 업로드</label></button>
                             <button className="upButton" onClick={()=>{
                                 setImg(null)
                                 setImgURL(null)
@@ -121,8 +121,8 @@ function Board(props){
                                 </div>
                             </div>
                             <div className="title-margin">
-                                <h4>제목미리보기</h4>
-                                <textarea placeholder="본문미리보기"></textarea>
+                                <h4>{title}</h4>
+                                <textarea placeholder="">{content}</textarea>
                             </div>
                         </div>
                     </section>

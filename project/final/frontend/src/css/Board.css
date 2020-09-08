@@ -103,6 +103,45 @@
     margin-bottom: 0.75rem;
     animation: 0.125s ease-in-out 0s 1 normal forwards running iMKika;
 }
+.textarea-display{
+    height: 794px;
+    max-height: 869px;
+    padding: 10px;
+    overflow: auto;
+    color: #000;
+    background-color: #fff;
+    outline: 0;
+}
+.post-textarea2{
+  display: none;
+  width: 100%;
+  font-size: 20px;
+  border: none;
+  outline: 0 none;
+  resize: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 50px;
+  padding-top: 15px;
+}
+.textarea-display img{
+  width: 400px;
+  height: 400px;
+}
+.textarea-display p{
+  font-size: 20px;
+}
+/* .textarea-display::before{
+  display: table;
+  content: " ";
+  box-sizing: border-box;
+}
+.textarea-display::after{
+  clear: both;
+  display: table;
+  content: " ";
+  box-sizing: border-box;
+} */
 /* write */
 
 

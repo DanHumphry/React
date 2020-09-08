@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import '../css/QA.css'
 
 function QA(){
+
+    let [boardList, setBoradList] = useState([])
+    useEffect(()=>{
+        (async ()=> {
+        try{
+            fetch('http://localhost:8000/api/borads/')
+            .then((res)=>res.json())
+            .then((posts)=>{
+                setBoradList(posts)
+            })
+        } catch(e){
+            console.log(e)
+        }
+        })();
+    },[])
+
     return(
         <div className="container">
             <div className="content-left">
@@ -39,13 +55,19 @@ function QA(){
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td className="title">제목테스트</td>
-                                                    <td className="user">test123</td>
-                                                    <td className="comment">0</td>
-                                                    <td className="vote">1</td>
-                                                    <td className="view">5</td>
-                                                </tr>
+                                                {
+                                                    boardList.map((a)=>{
+                                                        return(
+                                                            <tr key={a.id}>
+                                                                <td className="title">{a.title}</td>
+                                                                <td className="user">{a.username}</td>
+                                                                <td className="comment">{a.comment}</td>
+                                                                <td className="vote">{a.like}</td>
+                                                                <td className="view">{a.view}</td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
                                             </tbody>
                                         </table>
                                     </div>
@@ -56,8 +78,8 @@ function QA(){
                                             <li><Link to="/">3</Link></li>
                                             <li><Link to="/">4</Link></li>
                                             <li><Link to="/">5</Link></li>
-                                            <li><Link className="next-page">»</Link></li>
-                                            <li><Link className="last-page">마지막</Link></li>
+                                            <li><Link className="next-page" to="/">»</Link></li>
+                                            <li><Link className="last-page" to="/">마지막</Link></li>
                                         </ul>
                                     </div>
                                     <div className="search">
@@ -72,7 +94,7 @@ function QA(){
                                         </form>
                                     </div>
                                     <div className="control">
-                                        <Link to="/" className="searchADNcontrol">글쓰기</Link>
+                                        <Link to="/write" className="searchADNcontrol">글쓰기</Link>
                                     </div>
                                 </div>
                             </div>
@@ -81,6 +103,7 @@ function QA(){
                 </div>
             </div>
         </div>
+        
     )
 }
-export default QA
+export default QA;

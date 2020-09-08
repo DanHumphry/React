@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+from django.contrib.auth.models import User
 
 
 class Migration(migrations.Migration):
@@ -20,7 +21,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user_pk', models.IntegerField(default=id)),
                 ('email', models.EmailField(blank=True, max_length=500)),
-                ('nickname', models.CharField(blank=True, max_length=200)),
+                ('nickname', models.CharField(max_length=200, blank=True)),
                 ('photo', models.ImageField(blank=True, upload_to='profile/image')),
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],

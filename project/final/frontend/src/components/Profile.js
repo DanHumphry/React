@@ -1,30 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Profile.css'
+import Basic from '../img/red.jpg'
 
 function Profile(){
     let [infoModal, setInfomodal] = useState(false)
     let [nicknmaModal, setNickname] = useState(false)
     let [socialModal, setSocialModal] = useState(false)
 
-    let [profileImg, setProfileImg] = useState()
     let [profileURL, setProfileURL] = useState(null)
-    console.log(profileImg)
+    
+    let [userProfile, setUserProfile] = useState({})
+    let [userId, setUserId] = useState()
 
-    let [userProfile, setUserProfile] = useState()
-
-    // let url =  'http://localhost:8000/user/auth/profile/' + <user_pk> + '/update'
     useEffect(()=>{
-        fetch(url,{
-            method : 'PATCH',
-            headers: {
-                Authorization: `JWT ${localStorage.getItem('token')}`
-            },
+        fetch('http://localhost:8000/user/current/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+          }
         })
-        .then((res)=>res.json())
-        .then((posts)=>{
-            setUserProfile(posts)
+        .then(res => res.json())
+        .then(json => {
+          // 현재 유저 정보 받아왔다면, 로그인 상태로 state 업데이트 하고
+          if (json.id) {
+            setUserId(json.id)
+        }fetch('http://localhost:8000/user/auth/profile/' + json.id + '/update/',{
+                method : 'PATCH',
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem('token')}`
+                },
+            })
+            .then((res)=>res.json())
+            .then((userData)=>{
+                setUserProfile(userData)
+            })
         })
     },[])
+
+    const handleSubmit = (sendData) => {
+        let form_data = new FormData();
+        let fileField = document.querySelector('input[type="file"]');
+        form_data.append('title', sendData.title);
+        form_data.append('content', sendData.content);
+        form_data.append('comment', sendData.comment);
+        form_data.append('like', sendData.like);
+        form_data.append('view', sendData.view);
+        form_data.append('username', sendData.username);
+        form_data.append('image', fileField.files[0])
+
+        fetch('http://localhost:8000/user/auth/profile/' + userId + '/update/', {
+            method : 'POST',
+            headers: {
+                Authorization : `JWT ${localStorage.getItem('token')}`,
+            },
+            body : form_data
+        })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => console.log('Success:', JSON.stringify(response)));
+    };
 
     return(
         <>
@@ -38,15 +71,15 @@ function Profile(){
                                 let reader = new FileReader();
                                 let file = e.target.files[0];
                                 reader.onloadend = () => {
-                                setProfileImg(file)
                                 setProfileURL(reader.result)
                                 }
                                 reader.readAsDataURL(file);
+                            }} onClick={()=>{
+                                fetch()
                             }}></input>    
                         이미지 업로드</label>
                         <button className="img-de" onClick={()=>{
-                            setProfileImg(null)
-                            setProfileURL(null)
+                            setProfileURL(Basic)
                         }}>이미지 제거</button>
                     </div>
                     <div className="profile-info">

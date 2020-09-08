@@ -11,17 +11,25 @@ import Write from './components/Write';
 
 function App() {
   const [modal, setModal] = useState(false);
-  const [user, setUser] = useState()
-  const [userImg, setUserImg] = useState()
+  const [user, setUser] = useState([])
+  const [userId, setUserId] = useState()
   let [isAuthenticated, setisAuthenticated] = useState(localStorage.getItem('token') ? true : false)
-
-  const userHasAuthenticated = (authenticated, username, token) => { //회원가입이나 로그인이 성공했을 때 토큰을 저장
+  
+  const userHasAuthenticated = (authenticated, username, token) => { 
     setisAuthenticated(authenticated)
     setUser(username)
     localStorage.setItem('token', token);
-  }
+  }//회원가입이나 로그인이 성공했을 때 토큰을 저장
+
+  const handleLogout = () => {
+      setisAuthenticated(false)
+      setUser("")
+      localStorage.removeItem('token');
+      setModal(false)
+  }//로그아웃
 
   //회원가입이나 로그인이 성공했을 때 modal을 변경해 로그인 버튼을 없애고 글쓰기 버튼과 정보버튼을 나오게하는 setModal
+  //useEffect의 두번째 인자는 모든 렌더링 후 두번째 인자가 변경될때에만 실행되라는 내용 
   useEffect(()=>{
     if(isAuthenticated){
       setModal(true)
@@ -31,13 +39,7 @@ function App() {
     }
   },[isAuthenticated])
   
-  const handleLogout = () => {
-    //로그아웃
-      setisAuthenticated(false)
-      setUser("")
-      localStorage.removeItem('token');
-      setModal(false)
-  }
+  
   useEffect(() => {
     // 토큰(access token)이 이미 존재하는 상황이라면 서버에 GET /validate 요청하여 해당 access token이 유효한지 확인
     if (isAuthenticated) {
@@ -58,7 +60,8 @@ function App() {
         .then(json => {
           // 현재 유저 정보 받아왔다면, 로그인 상태로 state 업데이트 하고
           if (json.username) {
-            setUser({ username: json.username });
+            setUser(json.username);
+            setUserId(json.id)
           }
           // Refresh Token 발급 받아 token의 만료 시간 연장
           fetch('http://localhost:8000/refresh/', {
@@ -80,22 +83,15 @@ function App() {
         })
         .catch(error => {
           handleLogout();
+          console.log(error)
         });
       })
       .catch(error => {
         handleLogout();
+        console.log(error)
       });
     }
   },[isAuthenticated])
-
-  // 가끔 렉이걸려 user가 자동으로 로그아웃되어 undefined가 됬는데 modal이 true로 되어있어서 
-  // 유저가 undefined일 때 항상 modal은 false가되게 설정
-  useEffect(()=>{
-    if(user === undefined){
-      setModal(false)
-      setisAuthenticated(false)
-    }
-  },[user])
 
   return (
     <div className="App">
@@ -119,7 +115,7 @@ function App() {
 
       <Route exact path="/profile">
         <Header modal={modal} handleLogout={handleLogout}/>
-        <Profile userImg={userImg} setUserImg={setUserImg}/>
+        <Profile/>
       </Route>
 
       <Route exact path="/mysite">

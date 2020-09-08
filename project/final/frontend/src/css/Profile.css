@@ -28,7 +28,7 @@ form {
     display: block;
     margin-top: 0em;
 }
-.section2 input {
+/* .section2 input {
     text-rendering: auto;
     color: -internal-light-dark(black, white);
     letter-spacing: normal;
@@ -49,7 +49,7 @@ form {
     border-style: inset;
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(195, 195, 195));
     border-image: initial;
-}
+} */
 ul {
     display: block;
     list-style-type: disc;

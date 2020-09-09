@@ -6,7 +6,7 @@ function QA(){
 
     let [boardList, setBoradList] = useState([])
     useEffect(()=>{
-        (async ()=> {
+        (()=> {
         try{
             fetch('http://localhost:8000/api/borads/')
             .then((res)=>res.json())

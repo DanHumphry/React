@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Board.css';
 import { useHistory } from 'react-router'
 import '../css/Thumbnail.css'
@@ -17,19 +17,25 @@ function Board(props){
     let [imgURL, setImgURL] = useState()
     let [title , setTitle] = useState()
     let [content , setContent] = useState()
+    let [userPhoto, setUserPhoto] = useState()
 
-    let sendData = {
-        image : imgURL,
-        title : title,
-        content : content,
-        date : date,
-        comment : 0,
-        like : 0,
-        username : props.user,
-        language : languagefilter
+    let sendData;
+    const handleEffect = (handleSubmit) => {
+        sendData = {
+            image : imgURL,
+            title : title,
+            content : content,
+            date : date,
+            comment : 0,
+            like : 0,
+            username : props.user,
+            language : languagefilter,
+            profileImage : userPhoto
+        }
+        handleSubmit()
     }
-
-    const handleSubmit = (sendData) => {
+    
+    const handleSubmit = () => {
         let form_data = new FormData();
         let fileField = document.querySelector('input[type="file"]');
         form_data.append('title', sendData.title);
@@ -40,6 +46,7 @@ function Board(props){
         form_data.append('like', sendData.like);
         form_data.append('username', sendData.username);
         form_data.append('image', fileField.files[0])
+        form_data.append('profileImage', sendData.profileImage)
 
         fetch("http://localhost:8000/api/Todos/", {
             method : 'POST',
@@ -52,6 +59,35 @@ function Board(props){
         .catch(error => console.error('Error:', error))
         .then(response => console.log('Success:', JSON.stringify(response)));
     };
+
+    useEffect(()=>{
+        fetch('http://localhost:8000/user/current/', {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`
+          }
+        })
+        .then(res => res.json())
+        .then(json => {
+          // 현재 유저 정보 받아왔다면, 로그인 상태로 state 업데이트 하고
+          if (json.id) {
+            //유저정보를 받아왔으면 해당 user의 프로필을 받아온다.
+        }fetch('http://localhost:8000/user/auth/profile/' + json.id + '/update/',{
+                method : 'PATCH',
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem('token')}`
+                },
+            })
+            .then((res)=>res.json())
+            .then((userData)=> {
+                setUserPhoto(userData.photo)
+            })
+            .catch(error => {
+                console.log(error);
+              });;
+        }).catch(error => {
+            console.log(error)
+          });
+    },[userPhoto])
 
   return(
     <> 
@@ -160,7 +196,7 @@ function Board(props){
                     </div>
                     <div>
                         <button className="upButton" onClick={()=>{
-                            handleSubmit(sendData)
+                            handleEffect(handleSubmit)
                             setGoback(false)
                             histoty.goBack()
                         }}>출간하기</button>

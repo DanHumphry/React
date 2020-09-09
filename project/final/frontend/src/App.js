@@ -12,7 +12,6 @@ import Write from './components/Write';
 function App() {
   const [modal, setModal] = useState(false);
   const [user, setUser] = useState([])
-  const [userId, setUserId] = useState()
   let [isAuthenticated, setisAuthenticated] = useState(localStorage.getItem('token') ? true : false)
   
   const userHasAuthenticated = (authenticated, username, token) => { 
@@ -63,7 +62,6 @@ function App() {
           // 현재 유저 정보 받아왔다면, 로그인 상태로 state 업데이트 하고
           if (json.username) {
             setUser(json.username);
-            setUserId(json.id)
           }else{
             //유저가 undefined라면 로그인버튼이 나오도록 modal을 false로 항상 맞춰줌
             setModal(false)

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Post(models.Model):
@@ -19,6 +20,7 @@ class Todo(models.Model):
     like = models.IntegerField(default=0)
     username = models.CharField(max_length=200)
     language = models.CharField(max_length=200)
+    profileImage = models.CharField(default='/media/red.jpg', max_length=500)
 
     def __str__(self):
         return self.title

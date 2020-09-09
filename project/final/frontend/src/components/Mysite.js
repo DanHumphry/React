@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Mysite(){
     return(
-        <div className="main-section">
+        <div className="main_section">
             <div className="header-section">
                 <div className="profile">
                     <img src="/" alt="/"></img>

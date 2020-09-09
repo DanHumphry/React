@@ -37,10 +37,9 @@ function Profile(){
             .then((userData)=> {
                 setUserPhoto(userData.photo)
                 setUserEmail(userData.email)
-                setUserEmail(userData.mygit)
-                setUserEmail(userData.nickname)
-                setUserEmail(userData.myInfo)
-                console.log(userData)
+                setUserMygit(userData.mygit)
+                setUserNickname(userData.nickname)
+                setUserMyInfo(userData.myInfo)
             })
             .catch(error => {
                 console.log(error);
@@ -50,13 +49,7 @@ function Profile(){
           });
     },[userId])
 
-        let sendData = {
-            email : userEmail,
-            mygit : userMygit,
-            nickname : userNickname,
-            myInfo : usermyInfo
-        }
-
+    let sendData;
     const handleEffect = (handleSubmit) => {
         sendData = {
             email : userEmail,
@@ -143,8 +136,7 @@ function Profile(){
                             setUserPhoto(Basic)
                             handleImageDelete()
                         }}>이미지 제거</button>
-                        <button className="save-button" onClick={(e)=>{
-                            // e.preventDefault()
+                        <button className="save-button" onClick={()=>{
                             handleImageSubmit()
                             setInfomodal(false)
                             setNickname(false)
@@ -263,13 +255,11 @@ function Profile(){
                     <div className="myProfile">
                         <div className="wrapper">
                             <div className="title-wrapper">
-                                <h3>회원탈퇴</h3>
                             </div>
                             <div className="block-for-mobile">
                                 <div className="contents">
                                     <button className="out-button">회원탈퇴</button>
-                                    <button className="save-button" onClick={(e)=>{
-                                        // e.preventDefault()
+                                    <button className="save-button" onClick={()=>{
                                         handleEffect(handleSubmit)
                                         setInfomodal(false)
                                         setNickname(false)

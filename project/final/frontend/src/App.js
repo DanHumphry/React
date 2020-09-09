@@ -28,6 +28,8 @@ function App() {
       setModal(false)
   }//로그아웃
 
+  
+
   //회원가입이나 로그인이 성공했을 때 modal을 변경해 로그인 버튼을 없애고 글쓰기 버튼과 정보버튼을 나오게하는 setModal
   //useEffect의 두번째 인자는 모든 렌더링 후 두번째 인자가 변경될때에만 실행되라는 내용 
   useEffect(()=>{
@@ -62,6 +64,10 @@ function App() {
           if (json.username) {
             setUser(json.username);
             setUserId(json.id)
+          }else{
+            //유저가 undefined라면 로그인버튼이 나오도록 modal을 false로 항상 맞춰줌
+            setModal(false)
+            setisAuthenticated(false)
           }
           // Refresh Token 발급 받아 token의 만료 시간 연장
           fetch('http://localhost:8000/refresh/', {

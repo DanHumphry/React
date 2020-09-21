@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Profile.css'
-import Basic from '../img/red.jpg'
 
 function Profile(){
     let [infoModal, setInfomodal] = useState(false)
@@ -40,6 +39,7 @@ function Profile(){
                 setUserMygit(userData.mygit)
                 setUserNickname(userData.nickname)
                 setUserMyInfo(userData.myInfo)
+                console.log(userData)
             })
             .catch(error => {
                 console.log(error);
@@ -97,24 +97,6 @@ function Profile(){
         .then(response => console.log('Success:', JSON.stringify(response)));
     };
 
-    const handleImageDelete = () => {
-        let form_data = new FormData();
-        // let fileField = document.querySelector('input[type="file"]');
-        form_data.append('photo', null)
-
-        fetch('http://localhost:8000/user/auth/profile/' + userId + '/update/', {
-            method : 'PUT',
-            headers: {
-                Authorization : `JWT ${localStorage.getItem('token')}`,
-            },
-            body : form_data
-        })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(response => console.log('Success:', JSON.stringify(response)));
-    };
-
-
     return(
         <>
             <main className="profile-main">
@@ -133,10 +115,6 @@ function Profile(){
                             }}></input>
                         이미지 업로드</label>
                         <button className="img-de" onClick={()=>{
-                            setUserPhoto(Basic)
-                            handleImageDelete()
-                        }}>이미지 제거</button>
-                        <button className="save-button" onClick={()=>{
                             handleImageSubmit()
                             setInfomodal(false)
                             setNickname(false)
@@ -148,7 +126,7 @@ function Profile(){
                             infoModal === true
                             ?(
                                 <form>
-                                    <input placeholder={usermyInfo} onChange={(e)=>{
+                                    <input value={usermyInfo} placeholder={usermyInfo} onChange={(e)=>{
                                         setUserMyInfo(e.target.value)
                                     }}></input>
                                 </form>
@@ -258,7 +236,30 @@ function Profile(){
                             </div>
                             <div className="block-for-mobile">
                                 <div className="contents">
-                                    <button className="out-button">회원탈퇴</button>
+                                    <button className="out-button" onClick={()=>{
+                                        fetch('http://localhost:8000/user/current/', {
+                                            headers: {
+                                            Authorization: `JWT ${localStorage.getItem('token')}`
+                                            }
+                                        })
+                                        .then(res => res.json())
+                                        .then(json => {
+                                            fetch('http://localhost:8000/user/send/',{
+                                                method : 'POST',
+                                                headers: {
+                                                    Authorization: `JWT ${localStorage.getItem('token')}`,
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body : JSON.stringify({email : userEmail})
+                                            })
+                                            .then((res)=>res.json())
+                                            .catch(error => {
+                                                console.log(error);
+                                                });;
+                                        }).catch(error => {
+                                            console.log(error)
+                                            });
+                                    }}>회원탈퇴</button>
                                     <button className="save-button" onClick={()=>{
                                         handleEffect(handleSubmit)
                                         setInfomodal(false)

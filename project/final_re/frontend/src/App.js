@@ -5,6 +5,7 @@ import LoginModal from './components/LoginModal';
 import Profile from './components/Profile';
 import { Route } from 'react-router-dom';
 import './App.css';
+import Board from './components/Board';
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -112,6 +113,10 @@ function App() {
           <Route exact path="/profile">
             <Header modal={modal} handleLogout={handleLogout}/>
             <Profile/>
+          </Route>
+
+          <Route exact path="/board">
+            <Board user={user}/>
           </Route>
       </div>
     </div>

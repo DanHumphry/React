@@ -3,7 +3,8 @@
   margin: 0;
 }
 body{
-  background-color: #0c0c0c;
+  background-color: #111111;
+  overflow: hidden;
 }
 .header__margin{
   margin-top: 25vh;
@@ -15,12 +16,11 @@ body{
 .mainBody__padding{
   width: 100%;
   max-width: 1280px;
-  height: 45vh;
   position: relative;
 }
 .slide__section{
   display: grid;
-  height: 45vh;
+  height: 50vh;
   grid-template-columns: 15% 30% 15%;
   grid-column-gap: 20%;
   transform: skewY(10deg);
@@ -29,16 +29,19 @@ body{
   transform: perspective(610px) rotateY(-44deg);
   background-size: cover;
   cursor: pointer;
+  filter: blur(5px);
 }
 .slide__acticle__center{
   background-size: cover;
   cursor: pointer;
   transform: scale(1.5);
+  position: relative;
 }
 .slide__acticle__right{
   transform: perspective(610px) rotateY(44deg);
   background-size: cover;
   cursor: pointer;
+  filter: blur(3px);
 }
 /*   앞라인 slide css    */
 
@@ -132,6 +135,7 @@ body{
   width: 100%;
   margin-top: 7vh;
   transform: skewY(10deg);
+  filter: blur(4px);
 }
 .slide__back__display{
   display: flex;
@@ -141,13 +145,15 @@ body{
   width: 10vh;
   height: 30vh;
   transform: perspective(760px) rotateY(44deg);
-  background-image: url(./img/2.jpg);
+  /* background-image: url(./img/2.jpg); */
+  background-color: #1c1c1c67;
 }
 .slide__back__right{
   width: 10vh;
   height: 30vh;
   transform: perspective(760px) rotateY(-44deg);
-  background-image: url(./img/2.jpg);
+  /* background-image: url(./img/2.jpg); */
+  background-color: #1c1c1c67;
 }
 .slide__back__right__center{
   width: 8vh;
@@ -155,7 +161,8 @@ body{
   transform: perspective(400px) rotateY(-33deg);
   margin-right: 13vh;
   margin-top: 4vh;
-  background-image: url(./img/2.jpg);
+  /* background-image: url(./img/2.jpg); */
+  background-color: #1c1c1c67;
 }
 .slide__back__left__center{
   width: 8vh;
@@ -163,10 +170,91 @@ body{
   transform: perspective(400px) rotateY(33deg);
   margin-left: 13vh;
   margin-top: 4vh;
-  background-image: url(./img/2.jpg);
+  /* background-image: url(./img/2.jpg); */
+  background-color: #1c1c1c67;
 
 }
 .slide__back__section{
   display: flex;
 }
+.slide__shadow{
+  position: absolute;
+  top: 28vh;
+  left: -40px;
+  width: 89%;
+  height: 37%;
+  background-color: #1b1b1b;
+  transform: perspective(20px) rotateX(2deg) skewY(10deg);
+  border-radius: 100px;
+  filter: blur(90px);
+}
 /*   뒷라인 slide css    */
+
+
+
+/*   slide dec css    */
+.slide__dec__position{
+  color: aliceblue;
+  width: 100%;
+}
+.slide__dec__header{
+  position: absolute;
+  top: -17px;
+  right: 0;
+}
+.slide__dec__header p{
+  font-size: 12px;
+  color: #383838;
+}
+
+.footer_dec{
+  font-size: 12px;
+}
+.footer_number{
+  margin-left: 2.5vh;
+}
+.slide__dec__footer{
+  position: absolute;
+  bottom: -2vh;
+  transform: skewY(-10deg);
+  text-align: left;
+}
+/*   slide dec css    */
+
+
+/* side my Info */
+.myContactInfo{
+  color: aliceblue;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+.info__header{
+  color: #18c6b5;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.mySocial svg{
+  width: 30px;
+  height: 30px;
+}
+.st0{
+  fill:#494547;
+}
+ .st1{
+   fill:#FFFFFF;
+}
+/* side my Info */
+
+
+
+.detail__main__padding{
+  padding: 8%;
+  display: flex;
+}
+.detail__img__article{
+  width: 400px;
+  height: 720px;
+  border: 1px solid green;
+}

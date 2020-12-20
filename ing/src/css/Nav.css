@@ -1,0 +1,50 @@
+.nav1{
+  position: absolute;
+  left: 0;
+  width: 9.5rem;
+  height: 100%;
+  background-color: rgb(177,158,140);
+}
+.nav2{
+  position: absolute;
+  left: 9.5rem;
+  width: 5rem;
+  height: 100%;
+  background: linear-gradient(to right, rgb(177,158,140), rgba(197,182,169,0.6));
+}
+.nav3{
+  position: absolute;
+  left: 14.5rem;
+  width: 5rem;
+  height: 100%;
+  background: linear-gradient(to right, rgba(197,182,169,0.6), rgba(197,182,169,0.4));
+}
+.nav4{
+  position: absolute;
+  left: 19.5rem;
+  width: 5rem;
+  height: 100%;
+  background: linear-gradient(to right, rgba(197,182,169,0.4), rgba(243,240,238,0.3));
+}
+.foldNav{
+    cursor: pointer;
+    position: absolute;
+    left: 14.5rem;
+    top: 40%;
+    width: 60px;
+    height: 100px;
+    background-color: rgb(80, 80, 80);
+    border-radius: 0 100px 100px 0;
+}
+
+.Login{
+    display: flex;
+    padding: 12px;
+}
+.Login span{
+    cursor: pointer;
+    width: 50%;
+}
+.nav1 h1{
+  padding: 15px;
+}

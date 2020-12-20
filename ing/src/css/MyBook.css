@@ -1,0 +1,57 @@
+.BookBody{
+    padding-top: 2.5rem;
+}
+.BookBody .form p{
+    margin: 0.5rem 0;
+}
+.PlusFolder{
+    display: flex;
+}
+.PlusFolder svg{
+    margin: 3px 0.5rem 0 2rem;
+    cursor: pointer;
+}
+.PlusFolder p{
+    margin: 0;
+    cursor: pointer;
+}
+.mainSection{
+    margin-top: 2rem;
+}
+.mainSection img{
+    width: 20px;
+    height: 20px;
+}
+.mainSection p{
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+}
+.inFolderRepeatContent{
+    padding-left: 10px;
+}
+.folderSelect{
+    cursor: default;
+}
+.selectForm{
+    border: 1px solid black;
+    width: max-content;
+    position: absolute;
+    left: 18rem;
+    top: 162px;
+    background-color: white;
+}
+.selectForm ul{
+    padding: 0;
+    margin: 0;
+}
+.selectForm ul li{
+    cursor: default;
+}
+.selectForm ul li:hover{
+    background-color: blue;
+}
+.selectForm ul li + li{
+    margin: 0;
+    border-top: 1px solid black;
+}
